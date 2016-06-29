@@ -1,0 +1,111 @@
+@font-face {
+    font-family: montserrat;
+    src: url(./Montserrat-Regular.ttf);
+}
+
+/*basic reset*/
+* {margin: 0; padding: 0;}
+
+html {
+	background-color: #FFF;
+}
+
+body {
+	font-family: montserrat, arial, verdana;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit; /* no underline */
+}
+
+#banner {
+    background-image: url('../img/banner.png');
+    color: #FFF;
+    height: 99px;
+    padding: 15px 0 0 0;
+    font-size: 30px;
+}
+
+.nav-menu-item {
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+    padding: 4px 0 4px 0;
+    background-color: #ddd;
+}
+
+.nav-menu-item:hover {
+    cursor: pointer;
+    background-color: #aaa;
+}
+
+.active {
+    background-color: #ff0000 !important;
+}
+
+#about-page {
+    padding: 10px;
+}
+
+#portrait-img {
+    display: inline-block;
+    width: 500px;
+}
+
+#about-text {
+    top: -250px;
+    position: relative;
+    display: inline-block;
+    width: 500px;
+}
+
+#job-title {
+    font-size: 20px;
+    font-family: courier;
+}
+
+#footer {
+    background-color: #eee;
+    position: relative;
+    padding: 10px;
+    bottom: 0;
+}
+
+#conainer {
+    min-height: 600px;
+    margin: 20px 0 0 0;
+    overflow: scroll;
+}
+
+.content {
+
+}
+
+.page-heading {
+    font-size: 46px;
+}
+
+.skill {
+    font-size: 22px;
+    min-height: 100px;
+}
+
+.skill-left {
+    width: 50%;
+    text-align: right;
+    position: relative;
+    color: orange;
+    float: left;
+    padding: 5px 10px 5px 5px;
+    font-size: 28px;
+}
+
+
+.skill-right {
+    width: 50%;
+    float: right;
+    position: relative;
+    color: teal;
+    padding: 5px 5px 5px 10px;
+}

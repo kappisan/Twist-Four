@@ -1,0 +1,213 @@
+<style>
+
+
+#board {
+	width: 1200px;
+}
+
+.segment {
+    background-color: #545454;
+    display: inline-block;
+    width: 400px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+}
+
+.square {
+	background-color: #ddd;
+	display: inline-block;
+	width: 150px;
+	height: 150px;
+	margin: 20px;
+	border-radius: 10px;
+}
+
+.placep1:hover {
+	background-color: #00e;
+	cursor: pointer;
+}
+
+.placep2:hover {
+	background-color: #ee0;
+	cursor: pointer;
+}
+
+.p1-square, .p1-square:hover {
+	background-color: #00e;
+}
+
+.p2-square, .p2-square:hover {
+	background-color: #ee0;
+}
+
+#left-side {
+	position: absolute;
+	left: 0;
+}
+
+#right-side {
+	position: absolute;
+	right: 0;
+}
+
+.game-move {
+    margin: 10px;
+    border-color: #000;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 50px 90px 50px 30px;
+    font-size: 40px;
+}
+
+#p1-color {
+	width: 356px;
+    height: 150px;
+    color: #FFF;
+    margin: 20px 0 0 0;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #000;
+}
+
+#p1-color h1 {
+	font-size: 50px;
+	margin: 40px 0 0 0;
+}
+
+.active {
+	background-color: #f00;
+}
+
+.twistable {
+	cursor: pointer;
+}
+
+.twistable:hover {
+	background-color: #777;
+}
+
+.rotate-segment-icon {
+	font-size: 300px;
+    position: absolute;
+    z-index: 9999;
+    padding-left: 76px;
+    padding-top: 10px;
+    color: #125825;
+    display: none;
+}
+
+.go-icon {
+	color: #FFF;
+}
+
+.visible {
+	color: #000;
+}
+
+#game-score {
+    border-style: solid;
+    width: 500px;
+    height: 200px;
+    background-color: #bada55;
+    z-index: 999999;
+    position: absolute;
+    top: 500px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+#game-score h1 {
+	font-size: 60px;
+	padding-top: 50px;
+}
+
+
+
+
+
+
+
+</style>
+
+<div id="left-side">
+	<center>
+	
+	<div id="p1-color" class="p1-square">
+		<h1>Player one</h1>
+	</div>
+	<div id="p1-place" class="game-move" ng-class="{ active: move == 'p1-place' }">
+		<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-place' }"></i> Place</h2>
+	</div>
+	<div id="p1-twist" class="game-move" ng-class="{ active: move == 'p1-twist' }">
+		<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-twist' }"></i> Twist</h2>
+	</div>
+	</center>
+</div>
+
+
+<div id="right-side">
+	<center>
+
+	<div id="p1-color" class="p2-square"><h1>Player two</h1></div>
+	<div id="p2-place" class="game-move" ng-class="{ active: move == 'p2-place' }">
+		<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-place' }"></i> Place</h2>
+	</div>
+	<div id="p2-twist" class="game-move" ng-class="{ active: move == 'p2-twist' }">
+		<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-twist' }"></i> Twist</h2>
+	</div>
+	</center>
+</div>
+
+<div id="play-page">
+
+	<center>
+	<div id="board">
+		<div class="segment" ng-class="{ twistable: move == 'p1-twist' || move == 'p2-twist' }">
+			<div class="rotate-segment-icon">
+				<i class="fa fa-repeat" aria-hidden="true"></i>
+			</div>
+			<div id="s11" class="square" ng-click="selectSquare(1,1)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s12" class="square" ng-click="selectSquare(1,2)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s14" class="square" ng-click="selectSquare(1,4)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s13" class="square" ng-click="selectSquare(1,3)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+		</div>
+		<div class="segment" ng-class="{ twistable: move == 'p1-twist' || move == 'p2-twist' }">
+			<div class="rotate-segment-icon">
+				<i class="fa fa-repeat" aria-hidden="true"></i>
+			</div>
+			<div id="s21" class="square" ng-click="selectSquare(2,1)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s22" class="square" ng-click="selectSquare(2,2)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s24" class="square" ng-click="selectSquare(2,4)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s23" class="square" ng-click="selectSquare(2,3)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+		</div>		
+		<div class="segment" ng-class="{ twistable: move == 'p1-twist' || move == 'p2-twist' }">
+			<div class="rotate-segment-icon">
+				<i class="fa fa-repeat" aria-hidden="true"></i>
+			</div>
+			<div id="s31" class="square" ng-click="selectSquare(3,1)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s32" class="square" ng-click="selectSquare(3,2)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s34" class="square" ng-click="selectSquare(3,4)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s33" class="square" ng-click="selectSquare(3,3)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+		</div>
+		<div class="segment" ng-class="{ twistable: move == 'p1-twist' || move == 'p2-twist' }">
+			<div class="rotate-segment-icon">
+				<i class="fa fa-repeat" aria-hidden="true"></i>
+			</div>
+			<div id="s41" class="square" ng-click="selectSquare(4,1)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s42" class="square" ng-click="selectSquare(4,2)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s44" class="square" ng-click="selectSquare(4,4)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+			<div id="s43" class="square" ng-click="selectSquare(4,3)" ng-class="{ placep1: move == 'p1-place', placep2: move == 'p2-place' }" ></div>
+		</div>				
+	</div>
+</center>
+
+<center>
+	<div id="game-score">
+		<h1 id="win-text">{{ winText }}</h1>
+	</div>
+</center>
+
+<div>
