@@ -109,3 +109,190 @@ a {
     color: teal;
     padding: 5px 5px 5px 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#board {
+    width: 1200px;
+}
+
+.segment {
+    background-color: #545454;
+    display: inline-block;
+    width: 400px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+}
+
+.square {
+    background-color: #ddd;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.placep1:hover {
+    background-color: #00e;
+    cursor: pointer;
+}
+
+.placep2:hover {
+    background-color: #ee0;
+    cursor: pointer;
+}
+
+.p1-square, .p1-square:hover {
+    background-color: #00e;
+}
+
+.p2-square, .p2-square:hover {
+    background-color: #ee0;
+}
+
+#left-side {
+    position: absolute;
+    left: 0;
+}
+
+#right-side {
+    position: absolute;
+    right: 0;
+}
+
+.game-move {
+    margin: 10px;
+    border-color: #000;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 50px 90px 50px 30px;
+    font-size: 40px;
+}
+
+#p1-color {
+    width: 356px;
+    height: 150px;
+    color: #FFF;
+    margin: 20px 0 0 0;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #000;
+}
+
+#p1-color h1 {
+    font-size: 50px;
+    margin: 40px 0 0 0;
+}
+
+.active {
+    background-color: #f00;
+}
+
+.twistable {
+    cursor: pointer;
+}
+
+.twistable:hover {
+    background-color: #777;
+}
+
+.rotate-segment-icon {
+    font-size: 300px;
+    position: absolute;
+    z-index: 9999;
+    padding-left: 76px;
+    padding-top: 10px;
+    color: #125825;
+    display: none;
+}
+
+.go-icon {
+    color: #FFF;
+}
+
+.visible {
+    color: #000;
+}
+
+#game-score {
+    border-style: solid;
+    width: 500px;
+    height: 200px;
+    background-color: #bada55;
+    z-index: 999999;
+    position: absolute;
+    top: 500px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+#game-score h1 {
+    font-size: 60px;
+    padding-top: 50px;
+}
+
+
+
+/* animate rotation */
+.twistable:hover {
+  -webkit-transform: rotate(30deg);
+}
+
+.rotate {/*
+  -webkit-transition: all 2s ease-out;
+    -moz-transition: all 2s ease-out;
+    -o-transition: all 2s ease-out;
+    transition: all 2s ease-out;*/
+}
+
+.rotate:hover {
+  -webkit-transition: all 1s ease-in;
+    -moz-transition: all 1s ease-in;
+    -o-transition: all 1s ease-in;
+    transition: all 1s ease-in;
+}
