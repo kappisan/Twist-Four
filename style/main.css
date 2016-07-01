@@ -19,27 +19,6 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
-#banner {
-    background-image: url('../img/banner.png');
-    color: #FFF;
-    height: 99px;
-    padding: 15px 0 0 0;
-    font-size: 30px;
-}
-
-.nav-menu-item {
-    display: inline-block;
-    width: 33%;
-    text-align: center;
-    padding: 4px 0 4px 0;
-    background-color: #ddd;
-}
-
-.nav-menu-item:hover {
-    cursor: pointer;
-    background-color: #aaa;
-}
-
 .active {
     background-color: #ff0000 !important;
 }
@@ -58,11 +37,6 @@ a {
     position: relative;
     display: inline-block;
     width: 500px;
-}
-
-#job-title {
-    font-size: 20px;
-    font-family: courier;
 }
 
 #footer {
@@ -330,3 +304,58 @@ a {
     padding-top: 50px;
 }
 
+/*
+#rotate-icon {
+    position: absolute;
+    font-size: 40px;
+
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* KAPPISAN */
+
+#title-bar {
+    height: 120px;
+    top: 0;
+    left: 0px;
+    right: 0;
+    width: 100%;
+    position: relative;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ed1c24;
+    padding-left: 30px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    background-color: #fff;
+    z-index: 99;
+}
+
+#main-logo {
+  width: 280px;
+}
+
+#small-logo {
+  width: 80px;
+  float: right;
+  margin: 10px 50px 0 0;
+}

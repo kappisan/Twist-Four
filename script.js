@@ -72,6 +72,8 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		$('#s'+section+'1').addClass(box4);
 	}
 
+	
+
 	$s.selectSquare = function selectSquare(seg,sqr) {
 		console.log("selectSquare");
 		if($s.move == "p1-place") {
@@ -243,6 +245,13 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		if(p2Win) $s.player2Win();
 
 	}
+
+
+	// ON MOUSE MOVE
+	$(document).on('mousemove', function(e){
+	    //console.log( e.pageX, e.pageY);
+	});
+
 
 
 
