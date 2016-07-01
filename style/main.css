@@ -14,6 +14,10 @@ body {
 	font-family: montserrat, arial, verdana;
 }
 
+h2 {
+    color: #FFF;
+}
+
 a {
   color: inherit;
   text-decoration: inherit; /* no underline */
@@ -52,45 +56,9 @@ a {
     overflow: scroll;
 }
 
-.content {
-
-}
-
 .page-heading {
     font-size: 46px;
 }
-
-.skill {
-    font-size: 22px;
-    min-height: 100px;
-}
-
-.skill-left {
-    width: 50%;
-    text-align: right;
-    position: relative;
-    color: orange;
-    float: left;
-    padding: 5px 10px 5px 5px;
-    font-size: 28px;
-}
-
-
-.skill-right {
-    width: 50%;
-    float: right;
-    position: relative;
-    color: teal;
-    padding: 5px 5px 5px 10px;
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -161,28 +129,37 @@ a {
     border-radius: 5px;
     margin: 5px;
     background-color: #ddd;
+    transition: background-color 0.6s ease;
 }
 
 .placep1 div:hover {
-    background-color: #00e;
+    background-color: #ed1c24;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .placep2 div:hover {
     background-color: #ee0;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.p1-square div, .p1-square:hover div {
-    background-color: #00e;
-
-
+.p1-square div {
+    background-color: #ed1c24;
+}
+.p1-square:hover div {
+    background-color: #ed1c24;
+    transition: all 1s ease;
 }
 
-.p2-square div, .p2-square:hover div {
+
+.p2-square div {
     background-color: #ee0;
+}
 
-
+.p2-square:hover div {
+    background-color: #ee0;
+    transition: all 1s ease;
 }
 
 #left-side {
@@ -200,19 +177,22 @@ a {
     border-color: #000;
     border-style: solid;
     border-radius: 5px;
-    padding: 50px 90px 50px 30px;
-    font-size: 40px;
+    padding: 6px 90px 6px 30px;
+    font-size: 24px;
+}
+
+#p1-place, #p1-twist, #p2-place, #p2-twist {
+    background-color: #ccc;
 }
 
 #p1-color {
     width: 356px;
-    height: 150px;
     color: #FFF;
     margin: 20px 0 0 0;
     border-radius: 5px;
     border-style: solid;
     border-color: #000;
-    background-color: #00e;
+    background-color: #eee;
 }
 
 #p1-color h1 {
@@ -222,13 +202,12 @@ a {
 
 #p2-color {
     width: 356px;
-    height: 150px;
     color: #FFF;
     margin: 20px 0 0 0;
     border-radius: 5px;
     border-style: solid;
     border-color: #000;
-    background-color: #ee0;
+    background-color: #eee;
 }
 
 #p2-color h1 {
@@ -236,14 +215,22 @@ a {
     margin: 40px 0 0 0;
 }
 
+.activeone {
+    background-color: #ed1c24 !important;
+}
+
+.activetwo {
+    background-color: #ee0 !important;
+}
+
+
+
 .active {
-    background-color: #f00;
+    background-color: #ee0;
 }
 
 .twistable {
     cursor: pointer;
-
-
 }
 
 .twistable:hover {
