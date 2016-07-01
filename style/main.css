@@ -169,6 +169,7 @@ a {
     padding: 0;
     margin: 4px;
     font-size: 0;
+    border-radius: 5px;
 }
 
 .square {
@@ -232,9 +233,26 @@ a {
     border-radius: 5px;
     border-style: solid;
     border-color: #000;
+    background-color: #00e;
 }
 
 #p1-color h1 {
+    font-size: 50px;
+    margin: 40px 0 0 0;
+}
+
+#p2-color {
+    width: 356px;
+    height: 150px;
+    color: #FFF;
+    margin: 20px 0 0 0;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #000;
+    background-color: #ee0;
+}
+
+#p2-color h1 {
     font-size: 50px;
     margin: 40px 0 0 0;
 }
@@ -245,6 +263,14 @@ a {
 
 .twistable {
     cursor: pointer;
+
+  -webkit-transform: rotate(0deg);
+
+  -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+
 }
 
 .twistable:hover {
@@ -294,18 +320,11 @@ a {
 /* animate rotation */
 .twistable:hover {
   -webkit-transform: rotate(30deg);
+
+  -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+
 }
 
-.rotate {/*
-  -webkit-transition: all 2s ease-out;
-    -moz-transition: all 2s ease-out;
-    -o-transition: all 2s ease-out;
-    transition: all 2s ease-out;*/
-}
-
-.rotate:hover {
-  -webkit-transition: all 1s ease-in;
-    -moz-transition: all 1s ease-in;
-    -o-transition: all 1s ease-in;
-    transition: all 1s ease-in;
-}
