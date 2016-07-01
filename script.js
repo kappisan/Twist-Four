@@ -91,13 +91,10 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		$s.checkWin();
 	}
 
-	$s.twistSectionBackground = function twistSectionBackground(seg) {
-		console.log("twistSectionBackground", seg);
-		if($s.move == "p1-twist" || $s.move == "p2-twist") {
-			//$s.selectSquare(seg,1);
-		}
-	}
 
+	$s.rotateSeg = function rotateSeg(seg) {
+		console.log("seg",seg);
+	}
 
 	$s.player1Win = function player1Win() {
 		$s.winText = "Player 1 Wins";

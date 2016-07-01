@@ -177,6 +177,7 @@ a {
     display: inline-block;
     width: 150px;
     height: 150px;
+    z-index: 9999999999;
 }
 
 .square div {
@@ -200,10 +201,14 @@ a {
 
 .p1-square div, .p1-square:hover div {
     background-color: #00e;
+
+
 }
 
 .p2-square div, .p2-square:hover div {
     background-color: #ee0;
+
+
 }
 
 #left-side {
@@ -264,17 +269,27 @@ a {
 .twistable {
     cursor: pointer;
 
-  -webkit-transform: rotate(0deg);
-
-  -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
 
 }
 
 .twistable:hover {
     background-color: #777;
+
+    -webkit-transform: rotate(30deg);
+
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
+}
+
+.twistable:active {
+    -webkit-transform: rotate(90deg);
+
+    -webkit-transition: all .2s ease;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    transition: all .2s ease;
 }
 
 .rotate-segment-icon {
@@ -313,18 +328,5 @@ a {
 #game-score h1 {
     font-size: 60px;
     padding-top: 50px;
-}
-
-
-
-/* animate rotation */
-.twistable:hover {
-  -webkit-transform: rotate(30deg);
-
-  -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-
 }
 
