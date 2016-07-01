@@ -98,7 +98,7 @@ a {
 #board {
     width: 632px;
     margin: 20px 0 20px 0;
-    background-color: rgb(0, 167, 254);
+    background-color: rgb(254, 146, 0);
     padding: 12px;
     border-radius: 10px;
 }
@@ -162,58 +162,140 @@ a {
     transition: all 1s ease;
 }
 
-#left-side {
-    position: absolute;
-    left: 0;
+@media (max-width:1360px) { 
+
+    #left-side {
+        position: relative;
+        left: 0;
+    }
+
+    #right-side {
+        position: relative;
+        right: 0;
+    }
+
+    .game-move {
+        margin: 10px;
+        border-color: #000;
+        border-style: solid;
+        border-radius: 5px;
+        padding: 6px 10px 6px 10px;
+        font-size: 14px;
+    }
+
+    #p1-color h1, #p2-color h1 {
+        font-size: 20px;
+        margin: 10px 0 0 0;
+    }
+
+    #p1-color {
+        width: 206px;
+        color: #FFF;
+        margin: 10px 0 0 0;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: #000;
+        background-color: #eee;
+    }
+
+
+
+    #p2-color {
+        width: 200px;
+        color: #FFF;
+        margin: 10px 0 0 0;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: #000;
+        background-color: #eee;
+    }
+
+    #left-side {
+        position: relative;
+        left: 0;
+        top: 0;
+        display: inline-block;
+    }
+
+    #right-side {
+        position: relative;
+        right: 0;
+        top: 0;
+        display: inline-block;
+    }
+
+    .center-align {
+        margin: auto;
+        left: 0;
+        right: 0;
+    }
+
 }
 
-#right-side {
-    position: absolute;
-    right: 0;
+@media (min-width:1360px) { 
+
+
+
+
+
+    .game-move {
+        margin: 10px;
+        border-color: #000;
+        border-style: solid;
+        border-radius: 5px;
+        padding: 6px 90px 6px 30px;
+        font-size: 24px;
+    }
+
+    #p1-color h1, #p2-color h1 {
+        font-size: 50px;
+        margin: 40px 0 0 0;
+    }
+
+    #p1-color {
+        width: 356px;
+        color: #FFF;
+        margin: 20px 0 0 0;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: #000;
+        background-color: #eee;
+    }
+
+
+
+    #p2-color {
+        width: 356px;
+        color: #FFF;
+        margin: 20px 0 0 0;
+        border-radius: 5px;
+        border-style: solid;
+        border-color: #000;
+        background-color: #eee;
+    }
+
+    #left-side {
+        position: absolute;
+        left: 0;
+    }
+
+    #right-side {
+        position: absolute;
+        right: 0;
+    }
+
+
 }
 
-.game-move {
-    margin: 10px;
-    border-color: #000;
-    border-style: solid;
-    border-radius: 5px;
-    padding: 6px 90px 6px 30px;
-    font-size: 24px;
-}
+
+
+
 
 #p1-place, #p1-twist, #p2-place, #p2-twist {
     background-color: #ccc;
 }
 
-#p1-color {
-    width: 356px;
-    color: #FFF;
-    margin: 20px 0 0 0;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: #000;
-    background-color: #eee;
-}
 
-#p1-color h1 {
-    font-size: 50px;
-    margin: 40px 0 0 0;
-}
-
-#p2-color {
-    width: 356px;
-    color: #FFF;
-    margin: 20px 0 0 0;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: #000;
-    background-color: #eee;
-}
-
-#p2-color h1 {
-    font-size: 50px;
-    margin: 40px 0 0 0;
-}
 
 .activeone {
     background-color: #ed1c24 !important;

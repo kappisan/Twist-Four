@@ -72,9 +72,16 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		$('#s'+section+'1').addClass(box4);
 	}
 
-	
+
+	$s.takenSquares =  [[false, false, false, false],
+						[false, false, false, false],
+						[false, false, false, false],
+						[false, false, false, false]];
 
 	$s.selectSquare = function selectSquare(seg,sqr) {
+
+		//if($s.takenSquares[seg-1][sqr])
+
 		console.log("selectSquare");
 		if($s.move == "p1-place") {
 			$('#s'+seg+sqr).addClass("p1-square");
