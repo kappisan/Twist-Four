@@ -34,18 +34,14 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	}
 
 
-	$s.takenSquares =  [[false, false, false, false],
-						[false, false, false, false],
-						[false, false, false, false],
-						[false, false, false, false]];
-
     $s.okToMove = true;
 
 	$s.selectSquare = function selectSquare(seg,sqr) {
 
-
-
-		//if($s.takenSquares[seg-1][sqr])
+		if($("#s"+seg+sqr).hasClass("p1-square") || $("#s"+seg+sqr).hasClass("p2-square")) {
+			console.log("has class");
+			return;
+		}
 
 		console.log("selectSquare");
 		if($s.move == "p1-place") {
@@ -221,11 +217,9 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 			console.log("right diagonal");
 		}
 
-		if(p1Win && p2Win) {
-			$s.playerDraw();
-		}
-		else if(p1Win) $s.player1Win();
-		else if(p2Win) $s.player2Win();
+		if(p1Win && p2Win) { $s.playerDraw(); }
+		else if (p1Win) { $s.player1Win(); }
+		else if (p2Win) { $s.player2Win(); }
 
 	}
 
