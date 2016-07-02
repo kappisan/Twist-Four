@@ -142,18 +142,48 @@ a {
 
 
 .p1-square div {
-    background-color: #ed1c24;
+    background-color: #ed1c24 !important;
 }
-
-
 
 .p2-square div {
-    background-color: #ee0;
+    background-color: #ee0 !important;
 }
 
+/* hover styles here */ 
+@media only screen { 
 
+        .twistable:hover {
+            background-color: #777;
 
+            -webkit-transform: rotate(90deg);
 
+            -webkit-transition: all .75s ease;
+            -moz-transition: all .75s ease;
+            -o-transition: all .75s ease;
+            transition: all .75s ease;
+        }
+
+        .p1-square:hover div {
+            background-color: #ed1c24;
+            transition: all 1s ease;
+        }
+        .p2-square:hover div {
+            background-color: #ee0;
+            transition: all 1s ease;
+        }
+
+        .placep1 div:hover {
+            background-color: #ed1c24;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .placep2 div:hover {
+            background-color: #ee0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+}
 
 
 
@@ -228,10 +258,9 @@ a {
 
 }
 
+
+
 @media (min-width:1360px) { 
-
-
-
 
 
     .game-move {
@@ -279,39 +308,6 @@ a {
         position: absolute;
         right: 0;
     }
-
-    .twistable:hover {
-        background-color: #777;
-
-        -webkit-transform: rotate(90deg);
-
-        -webkit-transition: all .75s ease;
-        -moz-transition: all .75s ease;
-        -o-transition: all .75s ease;
-        transition: all .75s ease;
-    }
-
-    .p1-square:hover div {
-        background-color: #ed1c24;
-        transition: all 1s ease;
-    }
-    .p2-square:hover div {
-        background-color: #ee0;
-        transition: all 1s ease;
-    }
-
-    .placep1 div:hover {
-        background-color: #ed1c24;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .placep2 div:hover {
-        background-color: #ee0;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
 
 }
 
@@ -399,9 +395,23 @@ a {
 
 }*/
 
+#play-again {
+    width: 400px;
+    height: 50px;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background-color: #ed1c24;
+    border-style: solid;
+    border-color: #000;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
 
-
-
+#play-again:hover {
+    cursor: pointer;
+    color: #ddd;
+}
 
 
 
