@@ -50,6 +50,7 @@ a {
     bottom: 0;
 }
 
+
 #conainer {
     min-height: 600px;
     margin: 20px 0 0 0;
@@ -60,11 +61,17 @@ a {
     font-size: 46px;
 }
 
+#rules-section {
 
+    background-color: #ed1c24;
+    color: #fff;
+    padding: 10px;
 
+}
 
-
-
+#rules-section h3 {
+    font-size: 40px;
+}
 
 
 
@@ -119,7 +126,7 @@ a {
     display: inline-block;
     width: 150px;
     height: 150px;
-    z-index: 9999999999;
+    z-index: 9999999;
 }
 
 .square div {
@@ -161,6 +168,11 @@ a {
     background-color: #ee0;
     transition: all 1s ease;
 }
+
+
+
+
+
 
 @media (max-width:1360px) { 
 
@@ -318,21 +330,21 @@ a {
 .twistable:hover {
     background-color: #777;
 
-    -webkit-transform: rotate(30deg);
-
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
-}
-
-.twistable:active {
     -webkit-transform: rotate(90deg);
 
-    -webkit-transition: all .2s ease;
-    -moz-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease;
+    -webkit-transition: all .75s ease;
+    -moz-transition: all .75s ease;
+    -o-transition: all .75s ease;
+    transition: all .75s ease;
+}
+
+.twistable {
+    -webkit-transform: rotate(0deg);
+
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    transition: all .5s ease;
 }
 
 .rotate-segment-icon {

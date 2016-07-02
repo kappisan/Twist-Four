@@ -2,9 +2,7 @@ var app = angular.module('app', ['ngRoute'])
 	.config( ['$routeProvider', function($routeProvider) {
 		$routeProvider
 			.when('/', { redirectTo: '/play' })	
-			.when('/play', { templateUrl: 'templates/play.html' })	
-			.when('/rules', { templateUrl: 'templates/rules.html' })
-			.when('/playAI', { templateUrl: 'templates/playAI.html' })
+			.when('/play', { templateUrl: 'templates/play.html' })
 			.otherwise({ redirectTo: '/play' });
 	}]);
 
@@ -17,43 +15,6 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 	$s.move = "p1-place";
 	$s.winText = "No Win";
-
-
-	$s.changeCurrentPage = function(page) {
-		console.log("change", page);
-
-		$('.nav-menu-item').removeClass('active');
-
-		switch(page) {
-			case('play'): 
-				window.location = "#/play"; 
-				$('#nav-menu-play').addClass('active');
-				break;
-			case('playAI'): 
-				window.location = "#/playAI"; 
-				$('#nav-menu-playAI').addClass('active');
-				break;
-			case('rules'): 
-				window.location = "#/rules"; 
-				$('#nav-menu-rules').addClass('active');
-				break;
-		}
-	}
-
-	$( document ).ready(function() {
-
-		if($location.$$path== "/play") {
-			$('#nav-menu-play').addClass('active');
-		}
-		if($location.$$path== "/playAI") {
-			$('#nav-menu-playAI').addClass('active');
-		}
-		if($location.$$path== "/rules") {
-			$('#nav-menu-rules').addClass('active');
-			console.log("matched");
-		}
-	});
-
 
 
 	$s.twistSection = function twistSection(section) {
@@ -78,23 +39,21 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 						[false, false, false, false],
 						[false, false, false, false]];
 
+    $s.okToMove = true;
+
 	$s.selectSquare = function selectSquare(seg,sqr) {
+
+
 
 		//if($s.takenSquares[seg-1][sqr])
 
 		console.log("selectSquare");
 		if($s.move == "p1-place") {
 			$('#s'+seg+sqr).addClass("p1-square");
-			$s.move = "p1-twist";
-		} else if($s.move == "p1-twist") {
-			$s.twistSection(seg);
-			$s.move = "p2-place";
+			setTimeout(function() { $s.move = "p1-twist"; $s.$apply()}, 20);
 		} else if($s.move == "p2-place") {
 			$('#s'+seg+sqr).addClass("p2-square");
-			$s.move = "p2-twist";
-		} else if($s.move == "p2-twist") {
-			$s.twistSection(seg);
-			$s.move = "p1-place";
+			setTimeout(function() { $s.move = "p2-twist"; $s.$apply()}, 20);
 		}
 
 		$s.checkWin();
@@ -103,6 +62,19 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 	$s.rotateSeg = function rotateSeg(seg) {
 		console.log("seg",seg);
+
+		if($s.move == "p1-place" || $s.move == "p2-place") return;
+
+		if($s.move == "p1-twist") {
+			$s.twistSection(seg);
+			setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
+		} else if($s.move == "p2-twist") {
+			$s.twistSection(seg);
+			 setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
+		}
+
+		$s.checkWin();
+
 	}
 
 	$s.player1Win = function player1Win() {
@@ -120,6 +92,10 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		$("#game-score").css("display", "inherit");
 	}
 
+
+	$s.playAgain = function playAgain() {
+
+	}
 
 
 	$s.checkWin = function checkWin() {
@@ -246,10 +222,10 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		}
 
 		if(p1Win && p2Win) {
-			$scope.playerDraw();
+			$s.playerDraw();
 		}
-		if(p1Win) $s.player1Win();
-		if(p2Win) $s.player2Win();
+		else if(p1Win) $s.player1Win();
+		else if(p2Win) $s.player2Win();
 
 	}
 
