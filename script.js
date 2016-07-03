@@ -15,7 +15,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 	$s.move = "p1-place";
 	$s.winText = "No Win";
-	$s.AI = false;
+	$s.AI = true;
 
 
 	$s.twistSection = function twistSection(section) {
@@ -102,11 +102,14 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		} else if($s.move == "p2-twist") {
 			// rotate random segment
 			var randSeg = Math.floor(Math.random() * 4) + 1;
-			
-			$("#seg"+randSeg).trigger('hover'); 
+
+			$("#seg"+randSeg).addClass('twisting'); 
 			setTimeout(function() { 
+
 				$("#seg"+randSeg).click(); 
-			}, 1000);
+				$("#seg"+randSeg).removeClass('twisting');
+
+			}, 750);
 		}
 	}
 
