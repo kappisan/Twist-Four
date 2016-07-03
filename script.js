@@ -35,13 +35,19 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	}
 
 
-	$s.toggleAI = function toggleAI() {
-		$s.AI = !$s.AI;
-	}
+
+
+
+
+
+
+
 
     $s.okToMove = true;
 
 	$s.selectSquare = function selectSquare(seg,sqr) {
+
+		if($s.AI) return;
 
 		if($("#s"+seg+sqr).hasClass("p1-square") || $("#s"+seg+sqr).hasClass("p2-square")) {
 			console.log("has class");
@@ -69,6 +75,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		if($s.move == "p1-twist") {
 			$s.twistSection(seg);
 			setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
+			if($s.AI) setTimeout(function() { $s.moveAI(); }, 50);
 		} else if($s.move == "p2-twist") {
 			$s.twistSection(seg);
 			 setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
@@ -78,13 +85,45 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 	}
 
+	$s.moveAI = function moveAI() {
+		if($s.move == "p2-place") {
+			// find empty square
+			var randSeg = Math.floor(Math.random() * 4) + 1;
+			var randSqr = Math.floor(Math.random() * 4) + 1;
+
+			while($("#s"+randSeg+randSqr).hasClass("p1-square") || $("#s"+randSeg+randSqr).hasClass("p2-square")) {
+					randSeg = Math.floor(Math.random() * 4) + 1;
+					randSqr = Math.floor(Math.random() * 4) + 1;
+			}
+
+			setTimeout(function() { $("#s"+randSeg+randSqr).addClass("p2-square");}, 500);
+			setTimeout(function() { $s.move = "p2-twist"; $s.$apply(); $s.moveAI()}, 600);
+
+		} else if($s.move == "p2-twist") {
+			// rotate random segment
+			var randSeg = Math.floor(Math.random() * 4) + 1
+			
+			setTimeout(function() { 
+				document.getElementById("seg"+randSeg).click(); 
+			}, 1500);
+		}
+	}
+
+	$s.toggleAI = function toggleAI() {
+		$s.AI = !$s.AI;
+
+		if($s.AI) $s.moveAI();
+	}
+
+
 	$s.player1Win = function player1Win() {
 		$s.winText = "Player 1 Wins";
 		$("#game-score").css("display", "inherit");
 	}
 
 	$s.player2Win = function player1Win() {
-		$s.winText = "Player 2 Wins";
+		if($s.AI) $s.winText = "Computer Wins";
+		else $s.winText = "Player 2 Wins";
 		$("#game-score").css("display", "inherit");
 	}
 
@@ -252,31 +291,6 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	$(document).on('mousemove', function(e){
 	    //console.log( e.pageX, e.pageY);
 	});
-
-
-
-
-	// REMOVE HOVER FOR MOBILE DEVICES
-/*
-	var touch = window.ontouchstart || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
-
-	if (touch) { // remove all :hover stylesheets
-	    try { // prevent exception on browsers not supporting DOM styleSheets properly
-	        for (var si in document.styleSheets) {
-	            var styleSheet = document.styleSheets[si];
-	            if (!styleSheet.rules) continue;
-
-	            for (var ri = styleSheet.rules.length - 1; ri >= 0; ri--) {
-	                if (!styleSheet.rules[ri].selectorText) continue;
-
-	                if (styleSheet.rules[ri].selectorText.match(':hover')) {
-	                    styleSheet.deleteRule(ri);
-	                }
-	            }
-	        }
-	    } catch (ex) {}
-	}
-*/
 
 
 }]);

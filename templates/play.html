@@ -48,7 +48,7 @@
 
 	<center>
 	<div id="board">
-		<div class="segment" ng-class="{ twistable: move == 'p1-twist' || move == 'p2-twist' }" ng-click="rotateSeg(1)">
+		<div id="seg1" class="segment" ng-class="{ twistable: move == 'p1-twist' || (move == 'p2-twist' && !AI) }" ng-click="rotateSeg(1)">
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>
 			</div>
@@ -65,7 +65,7 @@
 				<div></div>
 			</div>
 		</div>
-		<div class="segment" ng-class="{ twistable: move == 'p1-twist' || move == 'p2-twist' }" ng-click="rotateSeg(2)">
+		<div id="seg2" class="segment" ng-class="{ twistable: move == 'p1-twist' || (move == 'p2-twist' && !AI) }" ng-click="rotateSeg(2)">
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>
 			</div>
@@ -82,7 +82,7 @@
 				<div></div>
 			</div>
 		</div>		
-		<div class="segment" ng-class="{ twistable: move == 'p1-twist' || move == 'p2-twist' }" ng-click="rotateSeg(3)">
+		<div id="seg3" class="segment" ng-class="{ twistable: move == 'p1-twist' || (move == 'p2-twist' && !AI) }" ng-click="rotateSeg(3)">
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>
 			</div>
@@ -99,7 +99,7 @@
 				<div></div>
 			</div>
 		</div>
-		<div class="segment" ng-class="{ twistable: move == 'p1-twist' || move == 'p2-twist' }" ng-click="rotateSeg(4)">
+		<div id="seg4" class="segment" ng-class="{ twistable: move == 'p1-twist' || (move == 'p2-twist' && !AI) }" ng-click="rotateSeg(4)">
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>
 			</div>
