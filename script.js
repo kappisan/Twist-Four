@@ -47,7 +47,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 	$s.selectSquare = function selectSquare(seg,sqr) {
 
-		if($s.AI) return;
+		if($s.AI && $s.move == "p2-place") return;
 
 		if($("#s"+seg+sqr).hasClass("p1-square") || $("#s"+seg+sqr).hasClass("p2-square")) {
 			console.log("has class");
@@ -101,11 +101,12 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 		} else if($s.move == "p2-twist") {
 			// rotate random segment
-			var randSeg = Math.floor(Math.random() * 4) + 1
+			var randSeg = Math.floor(Math.random() * 4) + 1;
 			
+			$("#seg"+randSeg).trigger('hover'); 
 			setTimeout(function() { 
-				document.getElementById("seg"+randSeg).click(); 
-			}, 1500);
+				$("#seg"+randSeg).click(); 
+			}, 1000);
 		}
 	}
 
