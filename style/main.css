@@ -62,20 +62,31 @@ a {
 }
 
 #rules-section {
-
     background-color: #ed1c24;
     color: #fff;
-    padding: 10px;
-
+    padding: 30px 20px 50px 20px;
 }
 
 #rules-section h3 {
     font-size: 40px;
 }
 
+#ai-button {
+    background-color: #ccc;
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 30px;
+}
 
-
-
+.activeAI {
+    background-color: #056e05 !important;
+    border-style: solid;
+    border-color: #000;
+}
 
 
 

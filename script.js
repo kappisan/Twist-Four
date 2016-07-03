@@ -15,6 +15,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 	$s.move = "p1-place";
 	$s.winText = "No Win";
+	$s.AI = false;
 
 
 	$s.twistSection = function twistSection(section) {
@@ -33,6 +34,10 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		$('#s'+section+'1').addClass(box4);
 	}
 
+
+	$s.toggleAI = function toggleAI() {
+		$s.AI = !$s.AI;
+	}
 
     $s.okToMove = true;
 
@@ -219,9 +224,26 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 			console.log("right diagonal");
 		}
 
+
+
+		// if all squares taken
+		var allSquares = true;
+		for(var i = 1; i <= 4; i++) {
+			for(var j = 1; j <= 4; j++) {
+				if(!$('#s'+i+''+j).hasClass("p1-square") && !$('#s'+i+''+j).hasClass("p2-square")) allSquares = false;
+			}			
+		}
+
+		if($('#s11').hasClass("p1-square") && $('#s12').hasClass("p1-square") && $('#s21').hasClass("p1-square") && $('#s22').hasClass("p1-square")) {
+			p1Win = true;
+			console.log("first row");
+		}
+
+
 		if(p1Win && p2Win) { $s.playerDraw(); }
 		else if (p1Win) { $s.player1Win(); }
 		else if (p2Win) { $s.player2Win(); }
+		else if (allSquares) { $s.playerDraw(); }
 
 	}
 

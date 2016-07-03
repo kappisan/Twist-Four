@@ -25,7 +25,9 @@
 
 
 	<div id="p2-color" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
-		<h1>Player two</h1>
+		<button id="ai-button" ng-click="toggleAI()" ng-class="{ activeAI: AI }">AI</button>
+		<h1 ng-if="!AI">Player two</h1>
+		<h1 ng-if="AI">Computer</h1>
 
 		<div id="p2-place" class="game-move" ng-class="{ active: move == 'p2-place' }">
 			<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-place' }"></i> Place</h2>
