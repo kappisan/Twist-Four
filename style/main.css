@@ -23,6 +23,17 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
+a:link {
+  color: #000 !important;
+  text-decoration: inherit; /* no underline */
+}
+
+a:visited {
+  color: #000 !important;
+  text-decoration: inherit; /* no underline */
+}
+
+
 .active {
     background-color: #ff0000 !important;
 }
@@ -80,6 +91,10 @@ a {
     left: 0;
     right: 0;
     top: 30px;
+}
+
+#ai-button:hover {
+    cursor: pointer;
 }
 
 .activeAI {

@@ -16,6 +16,8 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	$s.move = "p1-place";
 	$s.winText = "No Win";
 	$s.AI = true;
+	$s.gameOver = false;
+	$s.isTouch = !!("ontouchstart" in window) || window.navigator.msMaxTouchPoints > 0;
 
 
 	$s.twistSection = function twistSection(section) {
@@ -140,134 +142,89 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	$s.playAgain = function playAgain() {
 		$("#game-score").css("display", "none");
 		$(".square").removeClass("p1-square p2-square");
+		$s.gameOver = false;
 		$s.move = "p1-place";
+	}
+
+
+	$s.checkPlayerWin = function checkPlayerWin(player) {
+		var playerWin = false;
+
+		// first row
+		if($('#s11').hasClass(player+"-square") && $('#s12').hasClass(player+"-square") && $('#s21').hasClass(player+"-square") && $('#s22').hasClass(player+"-square")) {
+			playerWin = true; console.log("first row");
+		}		
+
+
+		// second row
+		if($('#s14').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s23').hasClass(player+"-square")) {
+			playerWin = true; console.log("second row");
+		}		
+
+
+		// third row
+		if($('#s31').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s42').hasClass(player+"-square")) {
+			playerWin = true; console.log("third row");
+		}		
+
+
+		// fourth row
+		if($('#s34').hasClass(player+"-square") && $('#s33').hasClass(player+"-square") && $('#s44').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
+			playerWin = true; console.log("fourth row");
+		}		
+
+
+		// first column
+		if($('#s11').hasClass(player+"-square") && $('#s14').hasClass(player+"-square") && $('#s31').hasClass(player+"-square") && $('#s34').hasClass(player+"-square")) {
+			playerWin = true; console.log("first column");
+		}		
+
+
+		// second column
+		if($('#s12').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s33').hasClass(player+"-square")) {
+			playerWin = true; console.log("second column");
+		}		
+
+
+		// third column
+		if($('#s21').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s44').hasClass(player+"-square")) {
+			playerWin = true; console.log("third column");
+		}		
+
+		// fourth column
+		if($('#s22').hasClass(player+"-square") && $('#s23').hasClass(player+"-square") && $('#s42').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
+			playerWin = true; console.log("fourth column");
+		}		
+
+
+		// top left diagonal
+		if($('#s11').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
+			playerWin = true; console.log("left diagonal");
+		}		
+
+		// top right diagonal
+		if($('#s22').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s34').hasClass(player+"-square")) {
+			playerWin = true; console.log("right diagonal");
+		}		
+
+		return playerWin;
+
 	}
 
 
 	$s.checkWin = function checkWin() {
 
-		var p1Win = false;
-		var p2Win = false;
+		/*
+			11 12   21 22
+			14 13   24 23
 
-		// first row
-		if($('#s11').hasClass("p1-square") && $('#s12').hasClass("p1-square") && $('#s21').hasClass("p1-square") && $('#s22').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("first row");
-		}		
+			31 32   41 42
+			34 33   44 43
 
-		if($('#s11').hasClass("p2-square") && $('#s12').hasClass("p2-square") && $('#s21').hasClass("p2-square") && $('#s22').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("first row");
-		}
+		*/
 
-
-
-		// second row
-		if($('#s14').hasClass("p1-square") && $('#s13').hasClass("p1-square") && $('#s24').hasClass("p1-square") && $('#s23').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("second row");
-		}		
-
-		if($('#s14').hasClass("p2-square") && $('#s13').hasClass("p2-square") && $('#s24').hasClass("p2-square") && $('#s23').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("second row");
-		}
-
-
-		// third row
-		if($('#s31').hasClass("p1-square") && $('#s32').hasClass("p1-square") && $('#s41').hasClass("p1-square") && $('#s42').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("third row");
-		}		
-
-		if($('#s31').hasClass("p2-square") && $('#s32').hasClass("p2-square") && $('#s41').hasClass("p2-square") && $('#s42').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("third row");
-		}
-
-
-		// fourth row
-		if($('#s34').hasClass("p1-square") && $('#s33').hasClass("p1-square") && $('#s44').hasClass("p1-square") && $('#s43').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("fourth row");
-		}		
-
-		if($('#s34').hasClass("p2-square") && $('#s33').hasClass("p2-square") && $('#s44').hasClass("p2-square") && $('#s43').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("fourth row");
-		}
-
-
-		// first column
-		if($('#s11').hasClass("p1-square") && $('#s14').hasClass("p1-square") && $('#s31').hasClass("p1-square") && $('#s34').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("first column");
-		}		
-
-		if($('#s11').hasClass("p2-square") && $('#s14').hasClass("p2-square") && $('#s31').hasClass("p2-square") && $('#s34').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("first column");
-		}
-
-
-		// second column
-		if($('#s12').hasClass("p1-square") && $('#s13').hasClass("p1-square") && $('#s32').hasClass("p1-square") && $('#s33').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("second column");
-		}		
-
-		if($('#s12').hasClass("p2-square") && $('#s13').hasClass("p2-square") && $('#s32').hasClass("p2-square") && $('#s33').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("second column");
-		}
-
-
-		// third column
-		if($('#s21').hasClass("p1-square") && $('#s24').hasClass("p1-square") && $('#s41').hasClass("p1-square") && $('#s44').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("third column");
-		}		
-
-		if($('#s21').hasClass("p2-square") && $('#s24').hasClass("p2-square") && $('#s41').hasClass("p2-square") && $('#s44').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("third column");
-		}
-
-		// fourth column
-		if($('#s22').hasClass("p1-square") && $('#s23').hasClass("p1-square") && $('#s42').hasClass("p1-square") && $('#s43').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("fourth column");
-		}		
-
-		if($('#s22').hasClass("p2-square") && $('#s23').hasClass("p2-square") && $('#s42').hasClass("p2-square") && $('#s43').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("fourth column");
-		}
-
-
-		// top left diagonal
-		if($('#s11').hasClass("p1-square") && $('#s13').hasClass("p1-square") && $('#s41').hasClass("p1-square") && $('#s43').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("left diagonal");
-		}		
-
-		if($('#s11').hasClass("p2-square") && $('#s13').hasClass("p2-square") && $('#s41').hasClass("p2-square") && $('#s43').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("left diagonal");
-		}
-
-		// top right diagonal
-		if($('#s22').hasClass("p1-square") && $('#s24').hasClass("p1-square") && $('#s32').hasClass("p1-square") && $('#s34').hasClass("p1-square")) {
-			p1Win = true;
-			console.log("right diagonal");
-		}		
-
-		if($('#s22').hasClass("p2-square") && $('#s24').hasClass("p2-square") && $('#s32').hasClass("p2-square") && $('#s34').hasClass("p2-square")) {
-			p2Win = true;
-			console.log("right diagonal");
-		}
-
-
+		var p1Win = $s.checkPlayerWin("p1");
+		var p2Win = $s.checkPlayerWin("p2");
 
 		// if all squares taken
 		var allSquares = true;
@@ -283,10 +240,10 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		}
 
 
-		if(p1Win && p2Win) { $s.playerDraw(); }
-		else if (p1Win) { $s.player1Win(); }
-		else if (p2Win) { $s.player2Win(); }
-		else if (allSquares) { $s.playerDraw(); }
+		if(p1Win && p2Win) { $s.playerDraw(); $s.gameOver = true; }
+		else if (p1Win) { $s.player1Win(); $s.gameOver = true; }
+		else if (p2Win) { $s.player2Win(); $s.gameOver = true; }
+		else if (allSquares) { $s.playerDraw(); $s.gameOver = true; }
 
 	}
 
