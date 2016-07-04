@@ -4,7 +4,7 @@
 
 	
 	<div id="p1-color" ng-class="{ activeone: (move == 'p1-place') || (move == 'p1-twist') }">
-		<h1>Player one {{ isTouch }}</h1>
+		<h1>Player one</h1>
 
 			<div id="p1-place" class="game-move" ng-class="{ active: move == 'p1-place' }">
 				<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-place' }"></i> Place</h2>
@@ -52,16 +52,16 @@
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>
 			</div>
-			<div id="s11" class="square" ng-click="selectSquare(1,1)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s11" class="square" ng-click="selectSquare(1,1)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s12" class="square" ng-click="selectSquare(1,2)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s12" class="square" ng-click="selectSquare(1,2)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s14" class="square" ng-click="selectSquare(1,4)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s14" class="square" ng-click="selectSquare(1,4)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s13" class="square" ng-click="selectSquare(1,3)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s13" class="square" ng-click="selectSquare(1,3)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
 		</div>
@@ -69,16 +69,16 @@
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>
 			</div>
-			<div id="s21" class="square" ng-click="selectSquare(2,1)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s21" class="square" ng-click="selectSquare(2,1)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s22" class="square" ng-click="selectSquare(2,2)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s22" class="square" ng-click="selectSquare(2,2)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s24" class="square" ng-click="selectSquare(2,4)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s24" class="square" ng-click="selectSquare(2,4)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s23" class="square" ng-click="selectSquare(2,3)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s23" class="square" ng-click="selectSquare(2,3)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
 		</div>		
@@ -86,16 +86,16 @@
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>
 			</div>
-			<div id="s31" class="square" ng-click="selectSquare(3,1)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s31" class="square" ng-click="selectSquare(3,1)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s32" class="square" ng-click="selectSquare(3,2)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s32" class="square" ng-click="selectSquare(3,2)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s34" class="square" ng-click="selectSquare(3,4)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s34" class="square" ng-click="selectSquare(3,4)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s33" class="square" ng-click="selectSquare(3,3)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s33" class="square" ng-click="selectSquare(3,3)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
 		</div>
@@ -103,20 +103,22 @@
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>
 			</div>
-			<div id="s41" class="square" ng-click="selectSquare(4,1)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s41" class="square" ng-click="selectSquare(4,1)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s42" class="square" ng-click="selectSquare(4,2)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s42" class="square" ng-click="selectSquare(4,2)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s44" class="square" ng-click="selectSquare(4,4)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s44" class="square" ng-click="selectSquare(4,4)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
-			<div id="s43" class="square" ng-click="selectSquare(4,3)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch }" >
+			<div id="s43" class="square" ng-click="selectSquare(4,3)" ng-class="{ placep1: move == 'p1-place' && !isTouch, placep2: move == 'p2-place' && !isTouch && !AI }" >
 				<div></div>
 			</div>
 		</div>				
 	</div>
+	<p>touchscreen = {{ isTouch }}</p>
+
 </center>
 
 <center>
@@ -130,9 +132,15 @@
 	<h3>Rules</h3>
 		<p>- A player has 2 moves, one place move then one twist move.</p>
 
+		<p>- You can only place pieces on empty squares.</p>
+
+		<p>- Segments can only be twisted clockwise.</p>
+
 		<p>- The first player to get four in a row wins.</p>
 
-		<p>- You cannot place pieces over opponents pieces.</p>	
+		<p>- If both players complete four in a row simultaneously the game is drawn.</p>
+
+		<p>- If all squares have been taken and no one has won, the game is drawn.</p>
 
 
 </div>

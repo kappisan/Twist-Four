@@ -34,6 +34,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 		$('#s'+section+'1').removeClass("p1-square p2-square");
 		$('#s'+section+'1').addClass(box4);
+
 	}
 
 
@@ -74,14 +75,38 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 		if($s.move == "p1-place" || $s.move == "p2-place") return;
 
-		if($s.move == "p1-twist") {
-			$s.twistSection(seg);
-			setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
-			if($s.AI) setTimeout(function() { $s.moveAI(); }, 50);
-		} else if($s.move == "p2-twist") {
-			$s.twistSection(seg);
-			 setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
-		}
+		//if(!$s.isTouch) {
+				$s.twistSection(seg);
+
+				if($s.move == "p1-twist") {
+					$s.move = "p2-place";
+					//setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
+					if($s.AI) setTimeout(function() { $s.moveAI(); }, 500);
+
+				} else if($s.move == "p2-twist") {
+					$s.move = "p1-place";
+					 //setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
+				}
+		/*} else {
+			$("#seg"+seg).addClass('twisting'); 
+			setTimeout(function() { 
+
+					$("#seg"+seg).removeClass('twisting'); 
+
+					$s.twistSection(seg);
+
+					if($s.move == "p1-twist") {
+						//$s.move = "p2-place";
+						setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
+						if($s.AI) setTimeout(function() { $s.moveAI(); }, 500);
+
+					} else if($s.move == "p2-twist") {
+						//$s.move = "p1-place";
+						 setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
+					}
+
+			}, 850);
+		}*/
 
 		$s.checkWin();
 

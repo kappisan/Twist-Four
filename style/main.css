@@ -23,15 +23,6 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
-a:link {
-  color: #000 !important;
-  text-decoration: inherit; /* no underline */
-}
-
-a:visited {
-  color: #000 !important;
-  text-decoration: inherit; /* no underline */
-}
 
 
 .active {
@@ -213,13 +204,13 @@ a:visited {
         .placep1 div:hover {
             background-color: #ed1c24;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.8s ease;
         }
 
         .placep2 div:hover {
             background-color: #ee0;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.8s ease;
         }
 }
 
