@@ -45,12 +45,9 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 
 
-
-    $s.okToMove = true;
-
 	$s.selectSquare = function selectSquare(seg,sqr) {
 
-		if($s.AI && $s.move == "p2-place") return;
+		if($s.AI && $s.move == "p2-place" || $s.gameOver) return;
 
 		if($("#s"+seg+sqr).hasClass("p1-square") || $("#s"+seg+sqr).hasClass("p2-square")) {
 			console.log("has class");
@@ -73,7 +70,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	$s.rotateSeg = function rotateSeg(seg) {
 		console.log("seg",seg);
 
-		if($s.move == "p1-place" || $s.move == "p2-place") return;
+		if($s.move == "p1-place" || $s.move == "p2-place" || $s.gameOver) return;
 
 		//if(!$s.isTouch) {
 				$s.twistSection(seg);
@@ -90,23 +87,26 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		/*} else {
 			$("#seg"+seg).addClass('twisting'); 
 			setTimeout(function() { 
+				$("#seg"+seg).removeClass('twisting'); 
 
-					$("#seg"+seg).removeClass('twisting'); 
+				$s.twistSection(seg);
 
-					$s.twistSection(seg);
+				if($s.move == "p1-twist") {
+					$s.move = "p2-place";
+					//setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
+					if($s.AI) $s.moveAI();
 
-					if($s.move == "p1-twist") {
-						//$s.move = "p2-place";
-						setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
-						if($s.AI) setTimeout(function() { $s.moveAI(); }, 500);
+				} else if($s.move == "p2-twist") {
+					$s.move = "p1-place";
+					//setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
+				}
 
-					} else if($s.move == "p2-twist") {
-						//$s.move = "p1-place";
-						 setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
-					}
 
-			}, 850);
-		}*/
+
+			}, 750);
+		}
+
+		*/
 
 		$s.checkWin();
 
@@ -130,15 +130,22 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 			// rotate random segment
 			var randSeg = Math.floor(Math.random() * 4) + 1;
 
-			$("#seg"+randSeg).addClass('twisting'); 
-			setTimeout(function() { 
-
-				$("#seg"+randSeg).click(); 
-				$("#seg"+randSeg).removeClass('twisting');
-
-			}, 750);
+			$s.animateRotateSeg(randSeg);
 		}
 	}
+
+	$s.animateRotateSeg = function animateRotateSeg(seg) {
+
+		$("#seg"+seg).addClass('twisting'); 
+		setTimeout(function() { 
+
+			$("#seg"+seg).click(); 
+			$("#seg"+seg).removeClass('twisting');
+
+		}, 750);
+
+	}
+
 
 	$s.toggleAI = function toggleAI() {
 		$s.AI = !$s.AI;
