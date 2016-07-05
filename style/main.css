@@ -182,7 +182,6 @@ a {
 @media only screen { 
 
         .twistable:hover {
-            background-color: #777;
 
             -webkit-transform: rotate(90deg);
 
