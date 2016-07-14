@@ -1,14 +1,19 @@
+
 var app = angular.module('app', ['ngRoute'])
 	.config( ['$routeProvider', function($routeProvider) {
 		$routeProvider
 			.when('/', { redirectTo: '/play' })	
 			.when('/play', { templateUrl: 'templates/play.html' })
+			.when('/d3', { templateUrl: 'templates/d3.html' })			
 			.otherwise({ redirectTo: '/play' });
 	}]);
 
 
+
+
 // CONTROLLERS
 app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, $location) {
+
 
 	console.log("location", $location.$$path);
 	$s.currentPage = $location.$$path;
@@ -88,9 +93,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 		if(!$s.isTouch) {
 				$s.rotateSegScreen(seg);
-
 		} else {
-
 				$s.rotateSegTouch(seg);
 		}
 

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Input test</title>
+<link href="../style/main.css" rel="stylesheet">
+  
+<button id="twist-test">twist</button>
+
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = 700;
+var height = 700;
+ 
+var svg = d3.select("body").append("svg")
+      
+var positions = [[{ x: 10, y: 10 },{ x: 210, y: 10 },{ x: 420, y: 10 }, { x: 630, y: 10 }]]
+
+
+var board = svg.attr("width", width).attr("height", height); 
+
+// draw 1st rect
+var sec1 = board.append("rect")
+  .style("fill", "grey")
+  .attr("id", "r11")
+  .attr("width", "300px")
+  .attr("height", "300px")
+  .attr("x", 20)
+  .attr("y", 20)
+  .attr("transform", "rotate(0)");
+
+var sqr11 = sec1.append("rect")
+                .style("fill", "blue")
+                .attr("id", "r11")
+                .attr("width", "140px")
+                .attr("height", "140px")
+                .attr("x", 10)
+                .attr("y", 10)
+                .attr("transform", "rotate(0)");
+
+
+
+var sec2 = board.append("rect")
+  .style("fill", "green")
+  .attr("id", "r12")
+  .attr("width", "300px")
+  .attr("height", "300px")
+  .attr("x", 340)
+  .attr("y", 20)  
+  .attr("transform", "rotate(0)");
+
+  var sec3 = board.append("rect")
+  .style("fill", "green")
+  .attr("id", "r12")
+  .attr("width", "300px")
+  .attr("height", "300px")
+  .attr("x", 20)
+  .attr("y", 340)  
+  .attr("transform", "rotate(0)");
+
+var sec4 = board.append("rect")
+  .style("fill", "green")
+  .attr("id", "r12")
+  .attr("width", "300px")
+  .attr("height", "300px")
+  .attr("x", 340)
+  .attr("y", 340)  
+  .attr("transform", "rotate(0)");
+
+sec1.on("click", function() {
+  twistSection1();
+});
+
+sec2.on("click", function() {
+  twistSection2();
+});
+
+sec3.on("click", function() {
+  twistSection3();
+});
+
+sec4.on("click", function() {
+  twistSection4();
+});
+
+
+// Initial starting angle of the text 
+
+var angle1 = 0;
+var angle2 = 0;
+var angle3 = 0;
+var angle4 = 0;
+
+function twistSection1() {
+    console.log("twist1");
+    angle1 += 90;
+    angle1 = angle1 % 360;
+
+    sec1    
+    .transition()
+    .duration(2000)
+    .attr("transform", "rotate("+angle1+",180,170)");
+
+}
+
+function twistSection2() {
+console.log("twist2");
+    angle2 += 90;
+    angle2 = angle2 % 360;
+
+    sec2    
+    .transition()
+    .duration(2000)
+    .attr("transform", "rotate("+angle2+",480,160)");
+
+}
+
+function twistSection3() {
+console.log("twist3");
+    angle3 += 90;
+    angle3 = angle3 % 360;
+
+    sec3    
+    .transition()
+    .duration(2000)
+    .attr("transform", "rotate("+angle3+",170,370)");
+
+}
+
+function twistSection4() {
+console.log("twist4");
+    angle4 += 90;
+    angle4 = angle4 % 360;
+
+    sec4    
+    .transition()
+    .duration(2000)
+    .attr("transform", "rotate("+angle4+",370,370)");
+
+}
+
+
+
+
+</script>

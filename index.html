@@ -3,16 +3,26 @@
 <head>
 
 	<link rel='shortcut icon' href='img/logo5.png' type='image/x-icon'/ >
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="UTF-8">
 
-	<meta property="og:title" content="Twist 4">
-	<!--<meta property="og:image" content="link_to_image">-->
-	<meta property="og:description" content="A fun two player game where you need 4 in a row to win!">
+    <!-- facebook meta data -->
+	<meta property="og:title" content="Twist Four">
+    <meta property="og:type" content="website" />
+	<meta property="og:description" content="A fun two player game where you need four in a row to win!">
+    <meta property="og:url" content="http://www.twistfour.com" />
+    <meta property="og:image" content="http://www.kappisan.com/img/logo_rectangle.png" />
 
-	<meta name="author" content="Kasper Wilkosz">
+    <!-- twitter meta data -->
+    <meta name="twitter:card" content="kappisan" />
+    <meta name="twitter:site" content="@kappisan_" />
+    <meta name="twitter:creator" content="@kappisan_" />
+
+
+	<meta name="author" content="kappisan">
 	<meta name="copyright" content="Kasper Wilkosz">
 	<meta name="keywords" content="fourtwist,twistfour,4twist,twist4,game,four,twist,1v1,kappisan">
-	<meta name="description" content="A fun two player game where you need 4 in a row to win!">
+	<meta name="description" content="A fun two player game where you need four in a row to win!">
+
 
 	<meta name="google-site-verification" content="VqH8Mj82plrhtbDWx5gW8sCTRRYpds79rPxxnkQNlxQ" />
 
@@ -25,11 +35,35 @@
 	<script type="text/javascript" src="./libs/angular.min.js"></script>
 	<script type="text/javascript" src="./libs/angular-route.min.js"></script>
 	<script type="text/javascript" src="./libs/jquery.min.js"></script>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
 
 
 </head>
     
 <body ng-app="app" ng-controller="PageCtrl">
+
+<!-- facebook api -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '126925514406508',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- / facebook api -->
+
+
+
 	<ng-include src="'./templates/banner.html'"></ng-include>  
 
 		<div id="container" ng-view>
@@ -48,6 +82,7 @@
 		(adsbygoogle = window.adsbygoogle || []).push({});
 		</script>
 		</center>
+
 		<!-- end adsense -->
 
 	<!-- FOOTER -->
@@ -65,6 +100,7 @@
 
 <center>
 	<div>
+		
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -75,7 +111,6 @@
   ga('send', 'pageview');
 
 </script>
-
 
 </div>
 </center>
