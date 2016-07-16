@@ -48,6 +48,20 @@
 
 	<center>
 	<div id="board">
+
+
+		<div ng-if="showLoadingSpinner" id="loading-spinner">
+			<div id="center-spinner">
+
+				<div id="loading-spinner-icon"></div>
+				<br><br><br>
+				<center><h1>Loading...</h1></center>
+			</div>
+		</div>
+
+
+
+
 		<div id="seg1" class="segment" ng-class="{ twistable: !isTouch && !gameOver && (move == 'p1-twist' || (move == 'p2-twist' && !AI)) }" ng-click="rotateSeg(1)">
 			<div class="rotate-segment-icon">
 				<i class="fa fa-repeat" aria-hidden="true"></i>

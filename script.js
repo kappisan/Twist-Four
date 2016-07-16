@@ -3,7 +3,8 @@ var app = angular.module('app', ['ngRoute'])
 	.config( ['$routeProvider', function($routeProvider) {
 		$routeProvider
 			.when('/', { redirectTo: '/play' })	
-			.when('/play', { templateUrl: 'templates/play.html' })
+			.when('/play', { templateUrl: 'templates/play.html', controller: 'pvpCtrl' })
+			.when('/level/1', { templateUrl: 'templates/play.html', controller: 'lv1Ctrl' })
 			.when('/d3', { templateUrl: 'templates/d3.html' })			
 			.otherwise({ redirectTo: '/play' });
 	}]);
@@ -12,6 +13,7 @@ var app = angular.module('app', ['ngRoute'])
 
 
 // CONTROLLERS
+
 app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, $location) {
 
 
@@ -22,7 +24,30 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	$s.winText = "No Win";
 	$s.AI = true;
 	$s.gameOver = false;
+	$s.showLoadingSpinner = true;
 	$s.isTouch = !!("ontouchstart" in window) || window.navigator.msMaxTouchPoints > 0;
+
+	function showSpinner() {
+		$s.showLoadingSpinner = true;
+		$("#loading-spinner").css("display", "initial");
+		$("#center-spinner").css("display", "initial");
+	}
+
+	function hideSpinner() {
+		console.log("hide");
+		$("#loading-spinner").addClass("fade-away");
+		$("#center-spinner").css("display", "none");
+		setTimeout(function() { 
+			$("#loading-spinner").css("display", "none"); 
+			$("#loading-spinner").removeClass("fade-away");
+		}, 1000);
+	}
+
+
+    angular.element(document).ready(function () {
+        setTimeout(function() { hideSpinner(); }, 500);
+    });
+
 
 
 	$s.twistSection = function twistSection(section) {
@@ -81,13 +106,11 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 		$s.twistSection(seg);
 
-
-
-
 	}
 
 	$s.rotateSeg = function rotateSeg(seg) {
 		console.log("seg",seg);
+		if($s.gameOver == true) return;
 
 		if($s.move == "p1-place" || $s.move == "p2-place" || $s.gameOver) return;
 
@@ -114,6 +137,8 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	}
 
 	$s.moveAI = function moveAI() {
+		if($s.gameOver == true) return;
+
 		if($s.move == "p2-place") {
 			// find empty square
 			var randSeg = Math.floor(Math.random() * 4) + 1;
@@ -179,6 +204,16 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		$s.move = "p1-place";
 	}
 
+	function addWinEffects(sq1,sq2,sq3,sq4) {
+
+		console.log("add win effects", $('#s'+sq1))
+
+		$('#s'+sq1+' div').addClass('pulsating-square');
+		$('#s'+sq2+' div').addClass('pulsating-square');
+		$('#s'+sq3+' div').addClass('pulsating-square');
+		$('#s'+sq4+' div').addClass('pulsating-square');
+	}
+
 
 	$s.checkPlayerWin = function checkPlayerWin(player) {
 		var playerWin = false;
@@ -186,58 +221,68 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 		// first row
 		if($('#s11').hasClass(player+"-square") && $('#s12').hasClass(player+"-square") && $('#s21').hasClass(player+"-square") && $('#s22').hasClass(player+"-square")) {
 			playerWin = true; console.log("first row");
+			addWinEffects('11','12','21','22');
 		}		
 
 
 		// second row
 		if($('#s14').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s23').hasClass(player+"-square")) {
 			playerWin = true; console.log("second row");
+			addWinEffects('14','13','24','23');
 		}		
 
 
 		// third row
 		if($('#s31').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s42').hasClass(player+"-square")) {
 			playerWin = true; console.log("third row");
+			addWinEffects('31','32','41','42');
 		}		
 
 
 		// fourth row
 		if($('#s34').hasClass(player+"-square") && $('#s33').hasClass(player+"-square") && $('#s44').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
 			playerWin = true; console.log("fourth row");
+			addWinEffects('34','33','44','43');
 		}		
 
 
 		// first column
 		if($('#s11').hasClass(player+"-square") && $('#s14').hasClass(player+"-square") && $('#s31').hasClass(player+"-square") && $('#s34').hasClass(player+"-square")) {
 			playerWin = true; console.log("first column");
+			addWinEffects('11','14','31','34');
 		}		
 
 
 		// second column
 		if($('#s12').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s33').hasClass(player+"-square")) {
 			playerWin = true; console.log("second column");
+			addWinEffects('12','13','32','33');
 		}		
 
 
 		// third column
 		if($('#s21').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s44').hasClass(player+"-square")) {
 			playerWin = true; console.log("third column");
+			addWinEffects('21','24','41','44');
 		}		
 
 		// fourth column
 		if($('#s22').hasClass(player+"-square") && $('#s23').hasClass(player+"-square") && $('#s42').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
 			playerWin = true; console.log("fourth column");
+			addWinEffects('22','23','42','43');
 		}		
 
 
 		// top left diagonal
 		if($('#s11').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
 			playerWin = true; console.log("left diagonal");
+			addWinEffects('11','13','41','43');
 		}		
 
 		// top right diagonal
 		if($('#s22').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s34').hasClass(player+"-square")) {
 			playerWin = true; console.log("right diagonal");
+			addWinEffects('22','24','32','34');
 		}		
 
 		return playerWin;
@@ -282,11 +327,43 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 
 	// ON MOUSE MOVE
-	$(document).on('mousemove', function(e){
+	//$(document).on('mousemove', function(e){
 	    //console.log( e.pageX, e.pageY);
-	});
+	//});
 
 
 }]);
 
 
+
+
+
+
+
+app.controller('lv1Ctrl', ['$scope', '$http', '$location', function($s, $http, $location) {
+
+	console.log("lv1Ctrl");
+
+
+
+
+
+
+
+
+}]);
+
+
+app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $location) {
+
+	console.log("pvpCtrl");
+
+
+
+
+
+
+
+
+
+}]);
