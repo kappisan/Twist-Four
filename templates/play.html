@@ -21,7 +21,7 @@
 </div>
 
 
-<div id="right-side">
+<div id="right-side" ng-if="showPlayer2">
 
 
 	<div id="p2-color" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
@@ -47,6 +47,10 @@
 <div id="play-page">
 
 	<center>
+		<div ng-if="gameTitle">{{ gameTitle }}</div>
+		<div ng-if="gameDescription">{{ gameDescription }}</div>
+
+
 	<div id="board">
 
 

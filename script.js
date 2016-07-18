@@ -20,7 +20,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	console.log("location", $location.$$path);
 	$s.currentPage = $location.$$path;
 
-	$s.move = "p1-place";
+
 	$s.winText = "No Win";
 	$s.AI = true;
 	$s.gameOver = false;
@@ -50,6 +50,9 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 
 
+
+
+
 	$s.twistSection = function twistSection(section) {
 		var box4 = $('#s'+section+'4').attr("class");
 
@@ -70,30 +73,16 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 
 
+	$s.animateRotateSeg = function animateRotateSeg(seg) {
 
+		$("#seg"+seg).addClass('twisting'); 
+		setTimeout(function() { 
 
+			$("#seg"+seg).click(); 
+			$("#seg"+seg).removeClass('twisting');
 
+		}, 750);
 
-
-	$s.selectSquare = function selectSquare(seg,sqr) {
-
-		if($s.AI && $s.move == "p2-place" || $s.gameOver) return;
-
-		if($("#s"+seg+sqr).hasClass("p1-square") || $("#s"+seg+sqr).hasClass("p2-square")) {
-			console.log("has class");
-			return;
-		}
-
-		console.log("selectSquare");
-		if($s.move == "p1-place") {
-			$('#s'+seg+sqr).addClass("p1-square");
-			setTimeout(function() { $s.move = "p1-twist"; $s.$apply()}, 20);
-		} else if($s.move == "p2-place") {
-			$('#s'+seg+sqr).addClass("p2-square");
-			setTimeout(function() { $s.move = "p2-twist"; $s.$apply()}, 20);
-		}
-
-		$s.checkWin();
 	}
 
 	$s.rotateSegTouch = function rotateSegTouch(seg) {
@@ -108,76 +97,10 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 	}
 
-	$s.rotateSeg = function rotateSeg(seg) {
-		console.log("seg",seg);
-		if($s.gameOver == true) return;
-
-		if($s.move == "p1-place" || $s.move == "p2-place" || $s.gameOver) return;
-
-		if(!$s.isTouch) {
-				$s.rotateSegScreen(seg);
-		} else {
-				$s.rotateSegTouch(seg);
-		}
-
-		
-		if($s.move == "p1-twist") {
-			$s.move = "p2-place";
-			//setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
-			if($s.AI) setTimeout(function() { $s.moveAI(); }, 800);
-
-		} else if($s.move == "p2-twist") {
-			$s.move = "p1-place";
-			 //setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
-		}
 
 
-		$s.checkWin();
-
-	}
-
-	$s.moveAI = function moveAI() {
-		if($s.gameOver == true) return;
-
-		if($s.move == "p2-place") {
-			// find empty square
-			var randSeg = Math.floor(Math.random() * 4) + 1;
-			var randSqr = Math.floor(Math.random() * 4) + 1;
-
-			while($("#s"+randSeg+randSqr).hasClass("p1-square") || $("#s"+randSeg+randSqr).hasClass("p2-square")) {
-					randSeg = Math.floor(Math.random() * 4) + 1;
-					randSqr = Math.floor(Math.random() * 4) + 1;
-			}
-
-			setTimeout(function() { $("#s"+randSeg+randSqr).addClass("p2-square");}, 500);
-			setTimeout(function() { $s.move = "p2-twist"; $s.$apply(); $s.moveAI()}, 600);
-
-		} else if($s.move == "p2-twist") {
-			// rotate random segment
-			var randSeg = Math.floor(Math.random() * 4) + 1;
-
-			$s.animateRotateSeg(randSeg);
-		}
-	}
-
-	$s.animateRotateSeg = function animateRotateSeg(seg) {
-
-		$("#seg"+seg).addClass('twisting'); 
-		setTimeout(function() { 
-
-			$("#seg"+seg).click(); 
-			$("#seg"+seg).removeClass('twisting');
-
-		}, 750);
-
-	}
 
 
-	$s.toggleAI = function toggleAI() {
-		$s.AI = !$s.AI;
-
-		if($s.AI) $s.moveAI();
-	}
 
 
 	$s.player1Win = function player1Win() {
@@ -326,13 +249,43 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	}
 
 
-	// ON MOUSE MOVE
-	//$(document).on('mousemove', function(e){
-	    //console.log( e.pageX, e.pageY);
-	//});
+	$s.loadBoard = function loadBoard(config) {
+		if(true) console.log("board", config);
+	}
 
 
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -342,27 +295,171 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 app.controller('lv1Ctrl', ['$scope', '$http', '$location', function($s, $http, $location) {
 
-	console.log("lv1Ctrl");
+	$s.gameTitle = "Level 1";
+	$s.move = "p1-twist";
+	$s.gameDescription = "make 2 twists to win";
+	$s.showPlayer2 = false;
 
 
 
 
+	$s.selectSquare = function selectSquare(seg,sqr) {
+		return;
+	}
 
 
+	$s.rotateSeg = function rotateSeg(seg) {
+		console.log("seg",seg);
+		if($s.gameOver == true) return;
 
+		if($s.move == "p1-place" || $s.move == "p2-place" || $s.gameOver) return;
+
+		if(!$s.isTouch) {
+			$s.rotateSegScreen(seg);
+		} else {
+			$s.rotateSegTouch(seg);
+		}
+
+		
+		if($s.move == "p1-twist") {
+			$s.move = "p1-twist";
+		}
+
+		$s.checkWin();
+	}
 
 }]);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// P v P
 
 app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $location) {
 
 	console.log("pvpCtrl");
 
+	$s.gameTitle = "Player vs Player";
+	$s.move = "p1-place";
+	$s.showPlayer2 = true;
+
+	$s.selectSquare = function selectSquare(seg,sqr) {
+
+		if($s.AI && $s.move == "p2-place" || $s.gameOver) return;
+
+		if($("#s"+seg+sqr).hasClass("p1-square") || $("#s"+seg+sqr).hasClass("p2-square")) {
+			console.log("has class");
+			return;
+		}
+
+		console.log("selectSquare");
+		if($s.move == "p1-place") {
+			$('#s'+seg+sqr).addClass("p1-square");
+			setTimeout(function() { $s.move = "p1-twist"; $s.$apply()}, 20);
+		} else if($s.move == "p2-place") {
+			$('#s'+seg+sqr).addClass("p2-square");
+			setTimeout(function() { $s.move = "p2-twist"; $s.$apply()}, 20);
+		}
+
+		$s.checkWin();
+	}
+
+
+	$s.rotateSeg = function rotateSeg(seg) {
+		console.log("seg",seg);
+		if($s.gameOver == true) return;
+
+		if($s.move == "p1-place" || $s.move == "p2-place" || $s.gameOver) return;
+
+		if(!$s.isTouch) {
+				$s.rotateSegScreen(seg);
+		} else {
+				$s.rotateSegTouch(seg);
+		}
+
+		
+		if($s.move == "p1-twist") {
+			$s.move = "p2-place";
+			//setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
+			if($s.AI) setTimeout(function() { $s.moveAI(); }, 800);
+
+		} else if($s.move == "p2-twist") {
+			$s.move = "p1-place";
+			 //setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
+		}
+
+
+		$s.checkWin();
+
+	}
+
+	$s.moveAI = function moveAI() {
+		if($s.gameOver == true) return;
+
+		if($s.move == "p2-place") {
+			// find empty square
+			var randSeg = Math.floor(Math.random() * 4) + 1;
+			var randSqr = Math.floor(Math.random() * 4) + 1;
+
+			while($("#s"+randSeg+randSqr).hasClass("p1-square") || $("#s"+randSeg+randSqr).hasClass("p2-square")) {
+					randSeg = Math.floor(Math.random() * 4) + 1;
+					randSqr = Math.floor(Math.random() * 4) + 1;
+			}
+
+			setTimeout(function() { $("#s"+randSeg+randSqr).addClass("p2-square");}, 500);
+			setTimeout(function() { $s.move = "p2-twist"; $s.$apply(); $s.moveAI()}, 600);
+
+		} else if($s.move == "p2-twist") {
+			// rotate random segment
+			var randSeg = Math.floor(Math.random() * 4) + 1;
+
+			$s.animateRotateSeg(randSeg);
+		}
+	}
 
 
 
+	$s.toggleAI = function toggleAI() {
+		$s.AI = !$s.AI;
 
-
+		if($s.AI) $s.moveAI();
+	}
 
 
 
