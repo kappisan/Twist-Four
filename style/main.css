@@ -114,7 +114,16 @@ a {
 
 
 
-
+#moves-remaining {
+    width: 356px;
+    color: #FFF;
+    margin: 20px 0 0 0;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #000;
+    background-color: #444;
+    height: 254px;
+}
 
 
 
@@ -166,7 +175,9 @@ a {
     background-color: #ee0 !important;
 }
 
-
+.block-square div {
+    background-color: #444 !important;
+}
 
 .twisting {
     -webkit-transform: rotate(90deg);
@@ -237,7 +248,7 @@ a {
         font-size: 14px;
     }
 
-    #p1-color h1, #p2-color h1 {
+    #p1-color h1, #p2-color h1, #moves-remaining h1 {
         font-size: 20px;
         margin: 10px 0 0 0;
     }
@@ -300,7 +311,7 @@ a {
         font-size: 24px;
     }
 
-    #p1-color h1, #p2-color h1 {
+    #p1-color h1, #p2-color h1, #moves-remaining h1 {
         font-size: 50px;
         margin: 40px 0 0 0;
     }

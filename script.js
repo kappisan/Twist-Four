@@ -14,7 +14,7 @@ var app = angular.module('app', ['ngRoute'])
 
 // CONTROLLERS
 
-app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, $location) {
+app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', function($s, $r, $http, $location) {
 
 
 	console.log("location", $location.$$path);
@@ -123,6 +123,7 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	$s.playAgain = function playAgain() {
 		$("#game-score").css("display", "none");
 		$(".square").removeClass("p1-square p2-square");
+		$(".square div").removeClass("pulsating-square");
 		$s.gameOver = false;
 		$s.move = "p1-place";
 	}
@@ -249,8 +250,19 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 	}
 
 
-	$s.loadBoard = function loadBoard(config) {
-		if(true) console.log("board", config);
+
+/*
+	[{ square: 's11', value: 'player1' }]
+
+*/
+	$r.loadBoard = function loadBoard(config) {
+		
+		config.forEach(function(d) {
+			console.log("config", d);
+			if(d.value == 'p1-square') $('#'+d.square).addClass('p1-square');
+			if(d.value == 'p2-square') $('#'+d.square).addClass('p2-square');
+			if(d.value == 'block-square') $('#'+d.square).addClass('block-square');
+		})
 	}
 
 
@@ -293,18 +305,25 @@ app.controller('PageCtrl', ['$scope', '$http', '$location', function($s, $http, 
 
 
 
-app.controller('lv1Ctrl', ['$scope', '$http', '$location', function($s, $http, $location) {
+app.controller('lv1Ctrl', ['$scope', '$rootScope', '$http', '$location', function($s, $r, $http, $location) {
 
 	$s.gameTitle = "Level 1";
 	$s.move = "p1-twist";
+	$s.availableMoves = 2;
 	$s.gameDescription = "make 2 twists to win";
 	$s.showPlayer2 = false;
+	$s.showMovesRemaining = true;
 
+	var config = [{ square: 's31', value: 'p1-square' },
+				  { square: 's34', value: 'p1-square' },
+				  { square: 's41', value: 'p1-square' },
+				  { square: 's44', value: 'p1-square' }];
 
+	$r.loadBoard(config);
 
 
 	$s.selectSquare = function selectSquare(seg,sqr) {
-		return;
+
 	}
 
 
@@ -323,6 +342,7 @@ app.controller('lv1Ctrl', ['$scope', '$http', '$location', function($s, $http, $
 		
 		if($s.move == "p1-twist") {
 			$s.move = "p1-twist";
+			$s.availableMoves--;
 		}
 
 		$s.checkWin();
@@ -378,6 +398,7 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 	$s.gameTitle = "Player vs Player";
 	$s.move = "p1-place";
 	$s.showPlayer2 = true;
+	$s.showMovesRemaining = false;
 
 	$s.selectSquare = function selectSquare(seg,sqr) {
 

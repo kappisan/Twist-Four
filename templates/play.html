@@ -21,10 +21,8 @@
 </div>
 
 
-<div id="right-side" ng-if="showPlayer2">
-
-
-	<div id="p2-color" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
+<div id="right-side">
+	<div id="p2-color" ng-if="showPlayer2" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
 		<button id="ai-button" ng-click="toggleAI()" ng-class="{ activeAI: AI }">AI</button>
 		<h1 ng-if="!AI">Player two</h1>
 		<h1 ng-if="AI">Computer</h1>
@@ -35,10 +33,14 @@
 		<div id="p2-twist" class="game-move" ng-class="{ active: move == 'p2-twist' }">
 			<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-twist' }"></i> Twist</h2>
 		</div>
-
 	</div>
 
+	<div id="moves-remaining" ng-if="showMovesRemaining" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
 
+		<h1>Moves Left</h1>
+		<h1>{{ availableMoves }}</h1>
+
+	</div>
 
 </div>
 
