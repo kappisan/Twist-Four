@@ -3,8 +3,13 @@
 
 <style>
 
+* {
+	margin: 0;
+	padding: 0;
+}
+
 .segment {
-    fill: #AA0;
+    fill: #9000aa;
 }
 
 .empty-square {
@@ -40,6 +45,9 @@ svg {
 <body>
 <script src="./libs/d3.min.js"></script>
 
+<div id="move">p1place</div>
+<button onclick="reset()">reset</button>
+
 <svg class="board"></svg>
 
 <script>
@@ -48,9 +56,9 @@ var width = 700,
     height = 700,
     segmentGap = 5,
     segmentSize = 300,
-    squaresPerSeg = 4,    
+    squareRows = 2,    
     squarePadding = 5,
-    squareSize = 142;
+    squareSize = 142; // @TODO: nake this dynamically calculated
 
 
 var svg = d3.select("body").append("svg")
@@ -59,14 +67,33 @@ var svg = d3.select("body").append("svg")
 
 var board = [ 
 	["blank","blank","blank","blank"],
-	["blank","red","blank","blank"],
-	["blue","blank","blank","blank"],
+	["blank","blank","blank","blank"],
+	["blank","blank","blank","blank"],
 	["blank","blank","blank","blank"]
 ];
 
-board.forEach(function(d,i) {
+var move = "p1place";
 
-	var g = svg.append("g")
+function drawBoard() {
+	board.forEach(function(d,i) {
+
+		var g = svg.append("g")
+			    .attr("x", function() {
+			    	if(i == 0 || i == 1) return 0;
+			    	else return segmentSize + segmentGap;
+			    })
+			    .attr("y", function() {
+			    	if(i == 0 || i == 2) return 0;
+			    	else return segmentSize + segmentGap;
+			    })
+			    .attr("height", segmentSize)
+		    	.attr("width", segmentSize)
+		    	.on("click", function() {
+		    		console.log("group clicked", g);
+		    	});
+
+		g.append("rect")
+		    .attr("class", "segment s"+i)
 		    .attr("x", function() {
 		    	if(i == 0 || i == 1) return 0;
 		    	else return segmentSize + segmentGap;
@@ -76,53 +103,54 @@ board.forEach(function(d,i) {
 		    	else return segmentSize + segmentGap;
 		    })
 		    .attr("height", segmentSize)
-	    	.attr("width", segmentSize)
-	    	.on("click", function() {
-	    		console.log("group clicked", g);
-	    	});
+		    .attr("width", segmentSize);
 
-	g.append("rect")
-	    .attr("class", "segment s"+i)
-	    .attr("x", function() {
-	    	if(i == 0 || i == 1) return 0;
-	    	else return segmentSize + segmentGap;
-	    })
-	    .attr("y", function() {
-	    	if(i == 0 || i == 2) return 0;
-	    	else return segmentSize + segmentGap;
-	    })
-	    .attr("height", segmentSize)
-	    .attr("width", segmentSize);
+		d.forEach(function(s,j) {
 
-	d.forEach(function(s,j) {
+			g.append("rect")
+			    .attr("class", function() {
+			    	if(s == "blank") return "empty-square";
+			    	else if(s == "red") return "red-square";
+			    	else if(s == "blue") return "blue-square";
+			    	else return "empty-square";
+			    })
+			    .attr("x", function() {
+			    	if(j == 0 || j == 1) return squarePadding;
+			    	else return squareSize + (2 * squarePadding);
+			    })
+			    .attr("y", function() {
+			    	if(j == 0 || j == 2) return squarePadding;
+			    	else return squareSize + (2 * squarePadding);
+			    })
+			    .attr("transform", function() {
+			    	if(i == 1) return "translate(0, "+(segmentSize+segmentGap)+")";
+			    	if(i == 2) return "translate("+(segmentSize+segmentGap)+", 0)";
+			    	if(i == 3) return "translate("+(segmentSize+segmentGap)+", "+(segmentSize+segmentGap)+")";
+			    })
+			    .attr("height", squareSize)
+			    .attr("width", squareSize)
+			    .on("click", function(d) {
+			    	console.log("d", j, i, s, this);
+			    	if(move == "p1place") {
+			    		d3.select(this).attr("class", "red-square");
+			    		move = "p2place";
+			    	} else {
+			    		d3.select(this).attr("class", "blue-square");
+			    		move = "p1place";
+			    	}
+			    	document.getElementById("move").innerHTML = "" + move;
+			    })
+		});
 
-		g.append("rect")
-		    .attr("class", function() {
-		    	if(s == "blank") return "empty-square";
-		    	else if(s == "red") return "red-square";
-		    	else if(s == "blue") return "blue-square";
-		    	else return "empty-square";
-		    })
-		    .attr("x", function() {
-		    	if(j == 0 || j == 1) return squarePadding;
-		    	else return squareSize + (2 * squarePadding);
-		    })
-		    .attr("y", function() {
-		    	if(j == 0 || j == 2) return squarePadding;
-		    	else return squareSize + (2 * squarePadding);
-		    })
-		    .attr("transform", function() {
-		    	if(i == 1) return "translate(0, "+(segmentSize+segmentGap)+")";
-		    	if(i == 2) return "translate("+(segmentSize+segmentGap)+", 0)";
-		    	if(i == 3) return "translate("+(segmentSize+segmentGap)+", "+(segmentSize+segmentGap)+")";
-		    })
-		    .attr("height", squareSize)
-		    .attr("width", squareSize)
-		    .on("click", function(d) {
-		    	console.log("d", j, i, s, this);
-		    })
 	});
+}
 
-});
+drawBoard();
+
+function reset() {
+	console.log("reset");
+	svg.selectAll("*").remove(),
+	drawBoard();
+}
 
 </script>
