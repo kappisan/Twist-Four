@@ -54,11 +54,11 @@ svg {
 
 var width = 700,
     height = 700,
-    segmentGap = 5,
+    segmentGap = 4,
     segmentSize = 300,
     squareRows = 2,    
-    squarePadding = 5,
-    squareSize = 142; // @TODO: nake this dynamically calculated
+    squarePadding = 4,
+    squareSize = (segmentSize / squareRows) - (1.5 * squarePadding);
 
 
 var svg = d3.select("body").append("svg")
@@ -138,6 +138,18 @@ function drawBoard() {
 			    		d3.select(this).attr("class", "blue-square");
 			    		move = "p1place";
 			    	}
+/*
+			    	d3.select(this).transition()
+					    .duration(1000)
+					    .attr("transform", function() {
+
+					    	if(i == 1) return "translate(0, "+(segmentSize+segmentGap)+")rotate(90)";
+					    	if(i == 2) return "translate("+(segmentSize+segmentGap)+", 0)rotate(90)";
+					    	if(i == 3) return "translate("+(segmentSize+segmentGap)+", "+(segmentSize+segmentGap)+")rotate(90)";
+
+					    	return "rotate(90)";
+					    })
+*/
 			    	document.getElementById("move").innerHTML = "" + move;
 			    })
 		});
