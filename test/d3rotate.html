@@ -10,8 +10,9 @@
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var width = 700;
-var height = 700;
+var width = 700,
+    height = 700,
+    squareSize = 300;
  
 var svg = d3.select("body").append("svg")
       
@@ -136,7 +137,7 @@ console.log("twist4");
     sec4    
     .transition()
     .duration(2000)
-    .attr("transform", "rotate("+angle4+",370,370)");
+    .attr("transform", "rotate("+angle4+","+(sec4.attr('x') - 150)+","+(sec4.attr('y') - 150)+")");
 
 }
 
