@@ -43,6 +43,8 @@ svg {
 </style>
 
 <body>
+
+<script src="./libs/jquery.min.js"></script>
 <script src="./libs/d3.min.js"></script>
 
 <div id="move">p1place</div>
@@ -52,25 +54,34 @@ svg {
 
 <script>
 
-var width = 700,
+var width = 600,
     height = 700,
     segmentGap = 4,
-    segmentSize = 300,
-    squareRows = 2,    
+    squareRows = 2,
+    segmentRows = 2,
     squarePadding = 4,
-    squareSize = (segmentSize / squareRows) - (1.5 * squarePadding);
+    segmentSize = (width / segmentRows) - (segmentRows * segmentGap),
+    squareSize = (segmentSize / squareRows) - (squareRows * squarePadding);
 
+    segmentSize -= squarePadding;
 
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-var board = [ 
-	["blank","blank","blank","blank"],
-	["blank","blank","blank","blank"],
-	["blank","blank","blank","blank"],
-	["blank","blank","blank","blank"]
-];
+var board = [];
+
+var segmentsOnBoard = segmentRows * segmentRows;
+var squaresPerSeg = squareRows * squareRows; 
+
+for(var i = 0; i < segmentsOnBoard; i++) {
+
+	var seg = [];
+	for(var j = 0; j < squaresPerSeg; j++) {
+		seg.push(["blank"]);
+	}
+	board.push(seg);
+}
 
 var move = "p1place";
 
@@ -78,19 +89,19 @@ function drawBoard() {
 	board.forEach(function(d,i) {
 
 		var g = svg.append("g")
-			    .attr("x", function() {
-			    	if(i == 0 || i == 1) return 0;
-			    	else return segmentSize + segmentGap;
-			    })
-			    .attr("y", function() {
-			    	if(i == 0 || i == 2) return 0;
-			    	else return segmentSize + segmentGap;
-			    })
-			    .attr("height", segmentSize)
-		    	.attr("width", segmentSize)
-		    	.on("click", function() {
-		    		console.log("group clicked", g);
-		    	});
+				    .attr("x", function() {
+				    	if(i == 0 || i == 1) return 0;
+				    	else return segmentSize + segmentGap;
+				    })
+				    .attr("y", function() {
+				    	if(i == 0 || i == 2) return 0;
+				    	else return segmentSize + segmentGap;
+				    })
+				    .attr("height", segmentSize)
+			    	.attr("width", segmentSize)
+			    	.on("click", function() {
+			    		console.log("group clicked", g);
+			    	});
 
 		g.append("rect")
 		    .attr("class", "segment s"+i)
