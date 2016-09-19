@@ -72,59 +72,92 @@ var svg = d3.select("body").append("svg")
 
 
 var board = [];
+var _board = [];
 
 var segmentsOnBoard = segmentRows * segmentRows;
 var squaresPerSeg = squareRows * squareRows; 
 
 for(var i = 0; i < segmentsOnBoard; i++) {
 
-	var seg = [];
-	for(var j = 0; j < squaresPerSeg; j++) {
-		seg.push(["blank"]);
+	var x = segmentSize + segmentGap;
+	if(i == 0 || i == 1) x = 0;
+
+	var y = segmentSize + segmentGap;
+	if(i == 0 || i == 2) y = 0;
+
+	var seg = { 
+		x: x, 
+		y: y,
+		angle: 0,
+		centerx: x + (segmentSize / 2),
+		centery: y + (segmentSize / 2),
+		squares: []
 	}
-	board.push(seg);
+
+	for(var j = 0; j < squaresPerSeg; j++) {
+
+		var sx = squareSize + (2 * squarePadding);
+		if(j == 0 || j == 1) sx = squarePadding;
+
+
+		var sy = squareSize + (2 * squarePadding);
+		if(j == 0 || j == 2) sy = squarePadding;
+
+		var sqr = { 
+			x: sx, 
+			y: sy,
+			parent: i,
+			angle: 0,
+			state: "blank",
+			squares: []
+		}
+
+		seg.squares.push(sqr);
+	}
+
+	board.push(seg.squares);
+	_board.push(seg);
 }
+
+console.log("_board", _board);
 
 var move = "p1place";
 
 function drawBoard() {
-	board.forEach(function(d,currentSeg) {
+	_board.forEach(function(segment, currentSeg) {
 
-		var phi0 = 90;
-
+		// segment group
 		var g = svg.append("g")
-				    .attr("x", function() {
-				    	if(currentSeg == 0 || currentSeg == 1) return 0;
-				    	else return segmentSize + segmentGap;
-				    })
-				    .attr("y", function() {
-				    	if(currentSeg == 0 || currentSeg == 2) return 0;
-				    	else return segmentSize + segmentGap;
-				    })
+				    .attr("x", function() { return segment.x; })
+				    .attr("y", function() { return segment.y; })
 				    .attr("class", "segGroup"+currentSeg)
 				    .attr("height", segmentSize)
 			    	.attr("width", segmentSize)
-			    	//.attr("transform", "translate(150, 150)")
 			    	.on("click", function() {
+
+			    		console.log("get transform", d3.select(this)[0][0]);
 			    		console.log("group clicked", g);
+
 			    		var twisting = true;
 			    		var angle = 0;
 			    		var t0 = Date.now();
 
 						d3.timer(function() {
 
-							var gCenterX = segmentSize / 2;
-							var gCenterY = segmentSize / 2;
+							var gCenterX = segment.centerx;
+							var gCenterY = segment.centery;
+
+
 
 							if(twisting) {
 								var delta = (Date.now() - t0);
-								svg.select(".segGroup"+currentSeg).selectAll("rect").attr("transform", function() {
-
+								g.selectAll("rect").attr("transform", function() {
 									return "rotate(" + delta * 1/25 + ","+gCenterX+","+gCenterY+")";
 								});
 
+								// return conditions
 								if(delta * 1/25 >= 90) {
-									svg.select(".segGroup"+currentSeg).selectAll("rect").attr("transform", function() {
+									g.selectAll("rect").attr("transform", function() {
 										return "rotate(90,"+gCenterX+","+gCenterY+")";
 									});										
 									twisting = false;
@@ -136,45 +169,36 @@ function drawBoard() {
 
 			    	});
 
+		// segment background
 		g.append("rect")
 		    .attr("class", "segment s"+currentSeg)
-		    .attr("x", function() {
-		    	if(currentSeg == 0 || currentSeg == 1) return 0;
-		    	else return segmentSize + segmentGap;
-		    })
-		    .attr("y", function() {
-		    	if(currentSeg == 0 || currentSeg == 2) return 0;
-		    	else return segmentSize + segmentGap;
-		    })
+		    .attr("x", function() { return segment.x; })
+		    .attr("y", function() { return segment.y; })
 		    .attr("height", segmentSize)
 		    .attr("width", segmentSize);
 
-		d.forEach(function(s,j) {
+		// iterate over squares 
+		segment.squares.forEach(function(square,j) {
+
+			console.log("square", square);
 
 			g.append("rect")
 			    .attr("class", function() {
-			    	if(s == "blank") return "empty-square";
-			    	else if(s == "red") return "red-square";
-			    	else if(s == "blue") return "blue-square";
+			    	if(square.state == "blank") return "empty-square";
+			    	else if(square.state == "red") return "red-square";
+			    	else if(square.state == "blue") return "blue-square";
 			    	else return "empty-square";
 			    })
 			    .attr("x", function() {
-			    	if(j == 0 || j == 1) return squarePadding;
-			    	else return squareSize + (2 * squarePadding);
+			    	return square.x + segment.x;
 			    })
 			    .attr("y", function() {
-			    	if(j == 0 || j == 2) return squarePadding;
-			    	else return squareSize + (2 * squarePadding);
-			    })
-			    .attr("transform", function() {
-			    	if(currentSeg == 1) return "translate(0, "+(segmentSize+segmentGap)+")";
-			    	if(currentSeg == 2) return "translate("+(segmentSize+segmentGap)+", 0)";
-			    	if(currentSeg == 3) return "translate("+(segmentSize+segmentGap)+", "+(segmentSize+segmentGap)+")";
+			    	return square.y + segment.y;
 			    })
 			    .attr("height", squareSize)
 			    .attr("width", squareSize)
 			    .on("click", function(d) {
-			    	console.log("d", j, currentSeg, s, this);
+			    	console.log("d", j, currentSeg, square, this);
 			    	console.log("segment", currentSeg);
 
 			    	if(move == "p1place") {
