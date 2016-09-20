@@ -35,6 +35,10 @@ svg {
 	right: 0;
 }
 
+.playerinfo {
+	font-size: 40px;
+}
+
 </style>
 
 <body>
@@ -46,8 +50,8 @@ svg {
 name: <input type="text" id="name-input">
 <button onclick="join()">Join</button>
 
-<div id="player1text"></div>
-<div id="player2text"></div>
+<div id="player1text" class="playerinfo"></div>
+<div id="player2text" class="playerinfo"></div>
 
 <div id="move">p1place</div>
 
@@ -96,7 +100,10 @@ function join() {
 
 function updatePlayers() {
 	if(game.player1) $("#player1text").html("" + game.player1.name);
+	else $("#player1text").html("");
+
 	if(game.player2) $("#player2text").html("" + game.player2.name);
+	else $("#player2text").html("");
 }
 
 

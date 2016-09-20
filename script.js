@@ -625,3 +625,170 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 
 
 }]);
+
+
+
+
+
+
+
+app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $location) {
+
+
+
+		var width = 600,
+		    height = 700,
+		    segmentGap = 4,
+		    squareRows = 2,
+		    rotationSpeed = 1/20,
+		    segmentRows = 2,
+		    squarePadding = 4,
+		    segmentSize = (width / segmentRows) - (segmentRows * segmentGap),
+		    squareSize = (segmentSize / squareRows) - (squareRows * squarePadding);
+
+		    segmentSize -= squarePadding;
+
+		var svg = d3.select("#board-div").append("svg")
+		    .attr("width", width)
+		    .attr("height", height);
+
+		var _board = [];
+
+		var segmentsOnBoard = segmentRows * segmentRows;
+		var squaresPerSeg = squareRows * squareRows; 
+
+		for(var i = 0; i < segmentsOnBoard; i++) {
+
+			var x = segmentSize + segmentGap;
+			if(i == 0 || i == 1) x = 0;
+
+			var y = segmentSize + segmentGap;
+			if(i == 0 || i == 2) y = 0;
+
+			var seg = { 
+				x: x, 
+				y: y,
+				seg: i,
+				angle: 0,
+				centerx: x + (segmentSize / 2),
+				centery: y + (segmentSize / 2),
+				squares: []
+			}
+
+			for(var j = 0; j < squaresPerSeg; j++) {
+
+				var sx = squareSize + (2 * squarePadding);
+				if(j == 0 || j == 1) sx = squarePadding;
+
+				var sy = squareSize + (2 * squarePadding);
+				if(j == 0 || j == 2) sy = squarePadding;
+
+				var sqr = { 
+					x: sx, 
+					y: sy,
+					parent: i,
+					square: j,
+					angle: 0,
+					state: "empty-square",
+					squares: []
+				}
+
+				seg.squares.push(sqr);
+			}
+
+			_board.push(seg);
+		}
+
+		console.log("_board", _board);
+
+		var move = "p1place";
+
+		function drawBoard() {
+			_board.forEach(function(segment) {
+
+				// segment group
+				var g = svg.append("g")
+						    .attr("x", segment.x)
+						    .attr("y", segment.y)
+						    .attr("height", segmentSize)
+					    	.attr("width", segmentSize)
+					    	.on("click", function() {
+
+					    		var twisting = true;
+					    		var t0 = Date.now();
+
+								d3.timer(function() {
+
+									if(twisting) {
+										var delta = (Date.now() - t0);
+										delta *= rotationSpeed;
+
+										var composite = segment.angle + delta;
+
+										g.selectAll("rect").attr("transform", function() {
+											return "rotate(" + composite + ","+segment.centerx+","+segment.centery+")";
+										});
+
+										// return conditions
+										if(delta >= 90) {
+											delta = 90;
+											segment.angle += delta;
+
+											g.selectAll("rect").attr("transform", function() {
+												return "rotate("+segment.angle+","+segment.centerx+","+segment.centery+")";
+											});										
+											twisting = false;
+										}
+									}
+								});
+
+								if(!twisting) return;
+
+					    	});
+
+				// segment background
+				g.append("rect")
+				    .attr("class", "segment")
+				    .attr("x", segment.x)
+				    .attr("y", segment.y)
+				    .attr("height", segmentSize)
+				    .attr("width", segmentSize);
+
+				// iterate over squares 
+				segment.squares.forEach(function(square) {
+
+					g.append("rect")
+					    .attr("class", square.state )
+					    .attr("x", function() {
+					    	return square.x + segment.x;
+					    })
+					    .attr("y", function() {
+					    	return square.y + segment.y;
+					    })
+					    .attr("height", squareSize)
+					    .attr("width", squareSize)
+					    .on("click", function(d) {
+					    	console.log("d", square, this);
+
+					    	if(move == "p1place") {
+					    		square.state = "red-square";
+					    		move = "p2place";
+					    	} else {
+					    		square.state = "blue-square";
+					    		move = "p1place";
+					    	}
+
+				    		d3.select(this).attr("class", square.state);
+
+					    	document.getElementById("move").innerHTML = "" + move;
+					    })
+				});
+
+			});
+		}
+
+		drawBoard();
+
+
+
+}]);
