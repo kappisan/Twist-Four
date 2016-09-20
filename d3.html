@@ -41,13 +41,78 @@ svg {
 
 <script src="./libs/jquery.min.js"></script>
 <script src="./libs/d3.min.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+name: <input type="text" id="name-input">
+<button onclick="join()">Join</button>
+
+<div id="player1text"></div>
+<div id="player2text"></div>
 
 <div id="move">p1place</div>
+
 <button onclick="reset()">reset</button>
+<button onclick="connect()">Connect</button>
 
 <svg class="board"></svg>
 
 <script>
+
+var socket = io();
+var player = { name: "no name" }
+var game = {
+	player1: null,
+	player2: null
+};
+
+socket.emit('chat message', "hello, i have connected");
+
+socket.on('status', function(g){
+	game = g;
+	console.log("game", g);
+	updatePlayers();
+});
+
+socket.on('move', function(move){
+	console.log("move", move);
+});
+
+function reset() {
+	console.log("reset");
+	svg.selectAll("*").remove(),
+	drawBoard();
+}
+
+function connect() {
+    socket.emit('chat message', "this is a chat message");
+    return false;
+}
+
+function join() {
+	player.name = $("#name-input").val();
+	console.log("join", player.name);
+	socket.emit('join game', player);
+}
+
+function updatePlayers() {
+	if(game.player1) $("#player1text").html("" + game.player1.name);
+	if(game.player2) $("#player2text").html("" + game.player2.name);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var width = 600,
     height = 700,
@@ -202,10 +267,6 @@ function drawBoard() {
 
 drawBoard();
 
-function reset() {
-	console.log("reset");
-	svg.selectAll("*").remove(),
-	drawBoard();
-}
+
 
 </script>
