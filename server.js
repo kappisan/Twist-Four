@@ -61,7 +61,9 @@ app.get('/libs/jquery.min.js', function(req, res){
 
 var game = {
 	player1: null,
-	player2: null
+	player2: null,
+	active: false,
+	move: null
 }
 
 var player1;
@@ -82,15 +84,19 @@ io.on('connection', function(socket){
 		if(!game.player1) game.player1 = player;
 		else if(!game.player2) game.player2 = player;
 
+		if(game.player1 && game.player2) game.active = true;
+
 		io.emit('status', game);
 	});
 
 	socket.on('disconnect', function(){
 		console.log('user disconnected');
-		var game = {
+		game = {
 			player1: null,
-			player2: null
-		};
+			player2: null,
+			active: false,
+			move: null
+		}
 		io.emit('status', game);
 
 	});
