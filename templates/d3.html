@@ -20,7 +20,7 @@
 	fill: #00C;
 }
 
-svg {
+.boardsvg {
 	position: relative;
 	margin: auto;
 	left: 0;
@@ -36,14 +36,16 @@ svg {
 
 
 <div ng-controller="d3Ctrl">
-	name: <input type="text" id="name-input">
-	<button onclick="join()">Join</button>
 
-	<div id="player1text" class="playerinfo"></div>
-	<div id="player2text" class="playerinfo"></div>
+	<ng-include src="'./templates/playerinfo.html'"></ng-include>
+
+	name: <input type="text" ng-model="player.name">
+	<button ng-click="join()" width="200" height="100">Join</button>
 
 	<div id="move">p1place</div>
 
 
-	<div id="board-div"></div>
+	<center>
+		<div id="board-div"></div>
+	</center>
 </div>

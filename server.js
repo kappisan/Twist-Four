@@ -1,10 +1,12 @@
 const PORT=8844; 
 
-
+/*
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+
+const server = app.listen(PORT);
 
 app.use(express.static('./'));
 
@@ -14,28 +16,40 @@ app.use(function(req, res, next) {
   next();
 });
 
+
 io.on('connection', function(socket){
+
+	console.log("connected");
+
   socket.on('chat message', function(msg){
     console.log('message: ' + msg);
   });
 });
 
-server = app.listen(PORT);
-
 var host = server.address().address
 var port = server.address().port
 
 console.log("four twist server listening on port %s", port);
+*/
 
 
-/*
+
+
+
+
+var express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+/*
 app.get('/', function(req, res){
   res.sendfile('./d3.html');
 });
+*/
+
+
+app.use(express.static('./'));
 
 app.get('/libs/d3.min.js', function(req, res){
   res.sendfile('./libs/d3.min.js');
@@ -73,6 +87,11 @@ io.on('connection', function(socket){
 
 	socket.on('disconnect', function(){
 		console.log('user disconnected');
+		var game = {
+			player1: null,
+			player2: null
+		};
+		io.emit('status', game);
 
 	});
 
@@ -82,4 +101,3 @@ http.listen(PORT, function(){
   console.log('listening on port:', PORT);
 });
 
-*/

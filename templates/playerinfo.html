@@ -1,0 +1,38 @@
+<center>
+<div id="left-side">
+
+	<div id="p1-color" ng-class="{ activeone: (move == 'p1-place') || (move == 'p1-twist') }">
+		<h1><span id="player1text">____________</span></h1>
+
+		<div id="p1-place" class="game-move" ng-class="{ active: move == 'p1-place' }">
+			<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-place' }"></i> Place</h2>
+		</div>
+		<div id="p1-twist" class="game-move" ng-class="{ active: move == 'p1-twist' }">
+			<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-twist' }"></i> Twist</h2>
+		</div>
+
+	</div>
+</div>
+
+
+<div id="right-side">
+	<div id="p2-color" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
+		<h1><span id="player2text">____________</span></h1>
+
+		<div id="p2-place" class="game-move" ng-class="{ active: move == 'p2-place' }">
+			<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-place' }"></i> Place</h2>
+		</div>
+		<div id="p2-twist" class="game-move" ng-class="{ active: move == 'p2-twist' }">
+			<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-twist' }"></i> Twist</h2>
+		</div>
+	</div>
+
+	<div id="moves-remaining" ng-if="showMovesRemaining" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
+
+		<h1>Moves Left</h1>
+		<h1>{{ availableMoves }}</h1>
+
+	</div>
+
+</div>
+</center>

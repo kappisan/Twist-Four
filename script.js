@@ -628,6 +628,47 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 
 
 
+app.controller('socketCtrl', ['$scope', '$http', '$location', function($s, $http, $location) {
+
+	var socket = io();
+	$s.player = { name: "" }
+
+	$s.game = {
+		player1: null,
+		player2: null
+	};
+
+	socket.emit('chat message', "hello, iiiii have connected");
+
+	socket.on('status', function(g){
+		$s.game = g;
+		console.log("$s.game", g);
+		updatePlayers();
+	});
+
+	$s.join = function join() {
+		//$s.player.name = $s.nameinput;
+		console.log("join", $s.player.name);
+		socket.emit('join game', $s.player);
+	}
+
+	function updatePlayers() {
+		if($s.game.player1) $("#player1text").html("" + $s.game.player1.name);
+		else $("#player1text").html("____________");
+
+		if($s.game.player2) $("#player2text").html("" + $s.game.player2.name);
+		else $("#player2text").html("____________");
+	}
+
+	updatePlayers();
+
+
+}]);
+
+
+
+
+
 
 
 
@@ -635,8 +676,9 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $location) {
 
 
+		console.log("D3 angular controller");
 
-		var width = 600,
+		var width = 622,
 		    height = 700,
 		    segmentGap = 4,
 		    squareRows = 2,
@@ -649,6 +691,7 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 		    segmentSize -= squarePadding;
 
 		var svg = d3.select("#board-div").append("svg")
+			.attr("class", "boardsvg")
 		    .attr("width", width)
 		    .attr("height", height);
 
