@@ -668,6 +668,14 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 		updatePlayers();
 	});
 
+	socket.on('move made', function(square){
+		
+		console.log("move made", square);
+
+		clickSquare(square);
+
+	});
+
 	$s.join = function join() {
 		console.log("join", $s.player.name);
 		socket.emit('join game', $s.player);
@@ -686,6 +694,32 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 
 
 
+	function clickSquare(square) {
+
+    	console.log("-----square", square);
+    	
+    	var sqrClass = "sqr" + square.parent + square.square;
+    	var self = $("." + sqrClass)[0];
+    	
+
+    	console.log("square.class", $("." + sqrClass)[0])
+
+    	if(move == "p1place") {
+    		square.state = "red-square";
+    		move = "p2place";
+    	} else {
+    		square.state = "blue-square";
+    		move = "p1place";
+    	}
+
+    	console.log("d3.select(self)", d3.select(self));
+
+		d3.select(self).attr("class", square.state);
+
+    	document.getElementById("move").innerHTML = "" + move;
+
+    	socket.emit('player move', square);
+    }
 
 
 
@@ -833,7 +867,7 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 				segment.squares.forEach(function(square) {
 
 					g.append("rect")
-					    .attr("class", square.state )
+					    .attr("class", square.state + " sqr" + square.parent + square.square )
 					    .attr("x", function() {
 					    	return square.x + segment.x;
 					    })
@@ -842,28 +876,12 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 					    })
 					    .attr("height", squareSize)
 					    .attr("width", squareSize)
-					    .on("click", function(d) {
-					    	console.log("d", square, this);
-
-					    	if(move == "p1place") {
-					    		square.state = "red-square";
-					    		move = "p2place";
-					    	} else {
-					    		square.state = "blue-square";
-					    		move = "p1place";
-					    	}
-
-				    		d3.select(this).attr("class", square.state);
-
-					    	document.getElementById("move").innerHTML = "" + move;
-					    })
+					    .on("click", function(d) { clickSquare(square); })
 				});
 
 			});
 		}
 
 		drawBoard();
-
-
 
 }]);
