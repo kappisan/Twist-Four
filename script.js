@@ -668,9 +668,9 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 		updatePlayers();
 	});
 
-	socket.on('move made', function(square){
+	socket.on('move made', function(square, game){
 		
-		console.log("move made", square);
+		console.log("move made", game);
 
 		clickSquare(square);
 
@@ -681,13 +681,37 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 		socket.emit('join game', $s.player);
 	}
 
+	$s.playing1 = false;
+	$s.playing2 = false;
+	$s.isP1 = false;
+	$s.isP2 = false;
+
 	function updatePlayers() {
-		if($s.game.player1) $("#player1text").html("" + $s.game.player1.name);
-		else $("#player1text").html("____________");
+		if($s.game.player1) {
+			$("#player1text").html("" + $s.game.player1.name);
+			$s.playing1 = true;
 
-		if($s.game.player2) $("#player2text").html("" + $s.game.player2.name);
-		else $("#player2text").html("____________");
+			if($s.player.name == $s.game.player1.name) $s.isP1 = true;
+			else if($s.player.name == $s.game.player2.name) $s.isP2 = true;
 
+		} else {
+			$("#player1text").html("____________");	
+		}
+
+		if($s.game.player2) {
+			$("#player2text").html("" + $s.game.player2.name);	
+			$s.playing2 = true;
+
+			if($s.player.name == $s.game.player1.name) $s.isP1 = true;
+			else if($s.player.name == $s.game.player2.name) $s.isP2 = true;
+
+		} else {
+			$("#player2text").html("____________");
+		}
+
+		setInterval(function() {
+			$s.$apply();
+		}, 50);
 	}
 
 	updatePlayers();
@@ -718,7 +742,6 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 
     	document.getElementById("move").innerHTML = "" + move;
 
-    	socket.emit('player move', square);
     }
 
 
@@ -876,7 +899,13 @@ app.controller('d3Ctrl', ['$scope', '$http', '$location', function($s, $http, $l
 					    })
 					    .attr("height", squareSize)
 					    .attr("width", squareSize)
-					    .on("click", function(d) { clickSquare(square); })
+					    .on("click", function(d) { 
+					    	/*clickSquare(square);*/ 
+
+
+	    						socket.emit('player move', square);
+	    					}
+						})
 				});
 
 			});
