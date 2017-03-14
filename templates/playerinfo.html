@@ -3,9 +3,9 @@
 <div id="left-side">
 
 
-	<div ng-if="game.active && isP1">THIS IS ME</div>
+	<div ng-if="game.active">IN PLAY</div>
 
-	<div id="p1-color" ng-class="{ activeone: playing1 }">
+	<div id="p1-color" ng-class="{ activeone: (move == 'p1-place') || (move == 'p1-twist') }">
 		<h1><span id="player1text"></span></h1>
 
 		<div id="p1-place" class="game-move" ng-class="{ active: move == 'p1-place' }">
@@ -22,9 +22,9 @@
 <div id="right-side">
 
 
-	<div ng-if="game.active && isP2">THIS IS ME</div>
+	<div ng-if="game.active">IN PLAY</div>
 
-	<div id="p2-color" ng-class="{ activetwo: playing2 }">
+	<div id="p2-color" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
 		<h1><span id="player2text"></span></h1>
 
 		<div id="p2-place" class="game-move" ng-class="{ active: move == 'p2-place' }">

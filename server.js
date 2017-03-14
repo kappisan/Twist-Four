@@ -40,7 +40,7 @@ io.on('connection', function(socket){
 	socket.on('player move', function(move){
 		console.log('player move: ' + move);
 
-		io.emit('move made', move, game);
+		io.emit('move made', move);
 	});
 
 	socket.on('disconnect', function(){
