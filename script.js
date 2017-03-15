@@ -17,10 +17,8 @@ var app = angular.module('app', ['ngRoute'])
 
 app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', function($s, $r, $http, $location) {
 
-
 	console.log("location", $location.$$path);
 	$s.currentPage = $location.$$path;
-
 
 	$s.winText = "No Win";
 	$s.AI = true;
@@ -44,15 +42,10 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 		}, 1000);
 	}
 
-
+	// hide loading spinner 500ms after page has loaded
     angular.element(document).ready(function () {
         setTimeout(function() { hideSpinner(); }, 500);
     });
-
-
-
-
-
 
 	$s.twistSection = function twistSection(section) {
 		var box4 = $('#s'+section+'4').attr("class");
@@ -68,7 +61,6 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 
 		$('#s'+section+'1').removeClass("p1-square p2-square");
 		$('#s'+section+'1').addClass(box4);
-
 	}
 
 
@@ -87,22 +79,12 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 	}
 
 	$s.rotateSegTouch = function rotateSegTouch(seg) {
-
 		$s.twistSection(seg);
-
 	}
 
 	$s.rotateSegScreen = function rotateSegScreen(seg) {
-
 		$s.twistSection(seg);
-
 	}
-
-
-
-
-
-
 
 	$s.player1Win = function player1Win() {
 		$s.winText = "Player 1 Wins";
@@ -126,7 +108,6 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 	}
 
 
-
 	function addWinEffects(sq1,sq2,sq3,sq4) {
 
 		console.log("add win effects", $('#s'+sq1))
@@ -145,43 +126,37 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 		if($('#s11').hasClass(player+"-square") && $('#s12').hasClass(player+"-square") && $('#s21').hasClass(player+"-square") && $('#s22').hasClass(player+"-square")) {
 			playerWin = true; console.log("first row");
 			addWinEffects('11','12','21','22');
-		}		
-
+		}
 
 		// second row
 		if($('#s14').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s23').hasClass(player+"-square")) {
 			playerWin = true; console.log("second row");
 			addWinEffects('14','13','24','23');
-		}		
-
+		}
 
 		// third row
 		if($('#s31').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s42').hasClass(player+"-square")) {
 			playerWin = true; console.log("third row");
 			addWinEffects('31','32','41','42');
-		}		
-
+		}
 
 		// fourth row
 		if($('#s34').hasClass(player+"-square") && $('#s33').hasClass(player+"-square") && $('#s44').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
 			playerWin = true; console.log("fourth row");
 			addWinEffects('34','33','44','43');
-		}		
-
+		}
 
 		// first column
 		if($('#s11').hasClass(player+"-square") && $('#s14').hasClass(player+"-square") && $('#s31').hasClass(player+"-square") && $('#s34').hasClass(player+"-square")) {
 			playerWin = true; console.log("first column");
 			addWinEffects('11','14','31','34');
-		}		
-
+		}
 
 		// second column
 		if($('#s12').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s33').hasClass(player+"-square")) {
 			playerWin = true; console.log("second column");
 			addWinEffects('12','13','32','33');
-		}		
-
+		}
 
 		// third column
 		if($('#s21').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s44').hasClass(player+"-square")) {
@@ -193,8 +168,7 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 		if($('#s22').hasClass(player+"-square") && $('#s23').hasClass(player+"-square") && $('#s42').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
 			playerWin = true; console.log("fourth column");
 			addWinEffects('22','23','42','43');
-		}		
-
+		}
 
 		// top left diagonal
 		if($('#s11').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
@@ -209,7 +183,6 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 		}		
 
 		return playerWin;
-
 	}
 
 
@@ -221,7 +194,6 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 
 			31 32   41 42
 			34 33   44 43
-
 		*/
 
 		var p1Win = $s.checkPlayerWin("p1");
@@ -251,10 +223,10 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 
 
 
-/*
-	[{ square: 's11', value: 'player1' }]
+	/*
+		[{ square: 's11', value: 'player1' }]
 
-*/
+	*/
 	$r.loadBoard = function loadBoard(config) {
 		
 		config.forEach(function(d) {
@@ -267,42 +239,6 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
 
 
 }]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 app.controller('lv1Ctrl', ['$scope', '$rootScope', '$http', '$location', function($s, $r, $http, $location) {
@@ -324,7 +260,6 @@ app.controller('lv1Ctrl', ['$scope', '$rootScope', '$http', '$location', functio
 				  { square: 's44', value: 'p1-square' }];
 
 	$r.loadBoard(config);
-
 
 	$s.selectSquare = function selectSquare(seg,sqr) {
 
@@ -355,7 +290,6 @@ app.controller('lv1Ctrl', ['$scope', '$rootScope', '$http', '$location', functio
 			$s.rotateSegTouch(seg);
 		}
 
-		
 		if($s.move == "p1-twist") {
 			$s.move = "p1-twist";
 			$s.availableMoves--;
@@ -366,16 +300,6 @@ app.controller('lv1Ctrl', ['$scope', '$rootScope', '$http', '$location', functio
 		if($s.availableMoves <= 0 && !won) $s.player1Lose();
 
 	}
-
-
-
-
-
-
-
-		
-
-
 }]);
 
 
@@ -524,7 +448,7 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 
 	console.log("pvpCtrl");
 
-	$s.gameTitle = "Player vs Player";
+	$s.gameTitle = "Player vs Computer";
 	$s.move = "p1-place";
 	$s.showPlayer2 = true;
 	$s.showMovesRemaining = false;
@@ -537,8 +461,6 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 
 		$s.move = "p1-place";
 	}
-
-
 
 	$s.selectSquare = function selectSquare(seg,sqr) {
 
@@ -569,22 +491,18 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 		if($s.move == "p1-place" || $s.move == "p2-place" || $s.gameOver) return;
 
 		if(!$s.isTouch) {
-				$s.rotateSegScreen(seg);
+			$s.rotateSegScreen(seg);
 		} else {
-				$s.rotateSegTouch(seg);
+			$s.rotateSegTouch(seg);
 		}
-
 		
 		if($s.move == "p1-twist") {
 			$s.move = "p2-place";
-			//setTimeout(function() { $s.move = "p2-place"; $s.$apply()}, 20);
 			if($s.AI) setTimeout(function() { $s.moveAI(); }, 800);
 
 		} else if($s.move == "p2-twist") {
 			$s.move = "p1-place";
-			 //setTimeout(function() { $s.move = "p1-place"; $s.$apply()}, 20);
 		}
-
 
 		$s.checkWin();
 
@@ -604,7 +522,7 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 			}
 
 			setTimeout(function() { $("#s"+randSeg+randSqr).addClass("p2-square");}, 500);
-			setTimeout(function() { $s.move = "p2-twist"; $s.$apply(); $s.moveAI()}, 600);
+			setTimeout(function() { $s.move = "p2-twist"; $s.$apply(); $s.moveAI();}, 600);
 
 		} else if($s.move == "p2-twist") {
 			// rotate random segment
@@ -614,15 +532,11 @@ app.controller('pvpCtrl', ['$scope', '$http', '$location', function($s, $http, $
 		}
 	}
 
-
-
 	$s.toggleAI = function toggleAI() {
 		$s.AI = !$s.AI;
 
 		if($s.AI) $s.moveAI();
 	}
-
-
 
 }]);
 

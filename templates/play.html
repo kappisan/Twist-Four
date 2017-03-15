@@ -1,23 +1,17 @@
-<center>
+<center style="background-color: #231f20;">
 
 <div id="left-side">
-
-	
 	<div id="p1-color" ng-class="{ activeone: (move == 'p1-place') || (move == 'p1-twist') }">
 		<h1>Player one</h1>
 
-			<div id="p1-place" class="game-move" ng-class="{ active: move == 'p1-place' }">
-				<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-place' }"></i> Place</h2>
-			</div>
-			<div id="p1-twist" class="game-move" ng-class="{ active: move == 'p1-twist' }">
-				<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-twist' }"></i> Twist</h2>
-			</div>
+		<div id="p1-place" class="game-move" ng-class="{ active: move == 'p1-place' }">
+			<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-place' }"></i> Place</h2>
+		</div>
+		<div id="p1-twist" class="game-move" ng-class="{ active: move == 'p1-twist' }">
+			<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-twist' }"></i> Twist</h2>
+		</div>
 
 	</div>
-
-
-
-
 </div>
 
 
@@ -49,12 +43,11 @@
 <div id="play-page">
 
 	<center style="background-color: #231f20;">
-		<div ng-if="gameTitle">{{ gameTitle }}</div>
+		<div ng-if="gameTitle" class="game-title">{{ gameTitle }}</div>
 		<div ng-if="gameDescription">{{ gameDescription }}</div>
 
 
 	<div id="board">
-
 
 		<div ng-if="showLoadingSpinner" id="loading-spinner">
 			<div id="center-spinner">
@@ -64,8 +57,6 @@
 				<center><h1>Loading...</h1></center>
 			</div>
 		</div>
-
-
 
 
 		<div id="seg1" class="segment" ng-class="{ twistable: !isTouch && !gameOver && (move == 'p1-twist' || (move == 'p2-twist' && !AI)) }" ng-click="rotateSeg(1)">
