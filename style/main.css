@@ -3,6 +3,11 @@
     src: url(./Montserrat-Regular.ttf);
 }
 
+@font-face {
+    font-family:apache;
+    src: url(./apache.ttf);
+}
+
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
@@ -23,7 +28,9 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
-
+.apache {
+    font-family: apache;
+}
 
 .active {
     background-color: #ff0000 !important;
@@ -567,6 +574,13 @@ a {
     border-right: 0;
     background-color: #ed1c24;
     z-index: 99;
+}
+
+#title-bar h1 {
+    position: absolute;
+    font-size: 100px;
+    text-align: center;
+    width: 100%;
 }
 
 #main-logo {

@@ -201,11 +201,6 @@ app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', functi
             }
         }
 
-        if($('#s11').hasClass("p1-square") && $('#s12').hasClass("p1-square") && $('#s21').hasClass("p1-square") && $('#s22').hasClass("p1-square")) {
-            p1Win = true;
-            console.log("first row");
-        }
-
         if(p1Win && p2Win) { $s.playerDraw(); $s.gameOver = true; return true;}
         else if (p1Win) { $s.player1Win(); $s.gameOver = true; return true;}
         else if (p2Win) { $s.player2Win(); $s.gameOver = true; return true;}
