@@ -142,9 +142,9 @@ a {
     width: 300px;
     height: 300px;
     padding: 0;
-    margin: 4px;
+    margin: 2px;
     font-size: 0;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .square {
@@ -409,20 +409,21 @@ a {
     border-style: solid;
     width: 500px;
     height: 200px;
-    background-color: rgba(28, 239, 28, 0.5);
+    background-color: rgba(35, 31, 32, 0.75);
     z-index: 999999;
     position: absolute;
     top: 350px;
     margin: auto;
     left: 0;
     right: 0;
-    border-radius: 10px;
+    border-radius: 4px;
     display: none;
 }
 
 #game-score h1 {
     font-size: 60px;
-    padding-top: 50px;
+    padding: 26px 0 10px 0;
+    color: #fff;
 }
 
 /*
@@ -436,10 +437,11 @@ a {
     width: 400px;
     height: 50px;
     margin: 10px 0 0 0;
-    border-radius: 5px;
+    border-radius: 2px;
     background-color: #ed1c24;
     border-style: solid;
     border-color: #000;
+    border-width: 4px;
     color: #fff;
     font-size: 24px;
     font-weight: bold;
@@ -522,9 +524,9 @@ a {
     opacity: 1.0
 }
 @-webkit-keyframes pulsate {
-    0% {-webkit-transform: scale(0.9, 0.9); opacity: 1.0;}
-    50% {-webkit-transform: scale(1.1, 1.1); opacity: 0.9;}
-    100% {-webkit-transform: scale(0.9, 0.9); opacity: 1.0;}
+    0% {-webkit-transform: scale(0.95, 0.95); opacity: 1.05;}
+    50% {-webkit-transform: scale(1.05, 1.05); opacity: 0.95;}
+    100% {-webkit-transform: scale(0.95, 0.95); opacity: 1.05;}
 }
 
 @-webkit-keyframes twist {
@@ -545,7 +547,7 @@ a {
 
 
 .barelyVisible {
-    opacity: 0.2 !important;
+    opacity: 0.05 !important;
 }
 
 /* KAPPISAN */
