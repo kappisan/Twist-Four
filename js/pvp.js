@@ -95,7 +95,10 @@ app.controller('pvpCtrl', ['$scope', function ($s) {
         $s.AI = !$s.AI;
 
         if ($s.AI) { 
+            $s.gameTitle = "PLAYER VS COMPUTER";
             $s.moveAI(); 
+        } else {
+            $s.gameTitle = "PLAYER VS PLAYER";
         }
     };
 
