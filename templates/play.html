@@ -1,42 +1,42 @@
 <center style="background-color: #231f20;">
 
-<div id="left-side">
-	<div id="p1-color" ng-class="{ activeone: (move == 'p1-place') || (move == 'p1-twist') }">
-		<h1>Player one</h1>
+	<div id="left-side" ng-class="{ barelVisible: (move == 'p2-place') || (move == 'p2-twist') }">
+		<div id="p1-color" ng-class="{ activeone: (move == 'p1-place') || (move == 'p1-twist') }">
+			<h1>Player one</h1>
 
-		<div id="p1-place" class="game-move" ng-class="{ active: move == 'p1-place' }">
-			<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-place' }"></i> Place</h2>
-		</div>
-		<div id="p1-twist" class="game-move" ng-class="{ active: move == 'p1-twist' }">
-			<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-twist' }"></i> Twist</h2>
-		</div>
+			<div id="p1-place" class="game-move" ng-class="{ active: move == 'p1-place' }">
+				<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-place' }"></i> Place</h2>
+			</div>
+			<div id="p1-twist" class="game-move" ng-class="{ active: move == 'p1-twist' }">
+				<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p1-twist' }"></i> Twist</h2>
+			</div>
 
-	</div>
-</div>
-
-
-<div id="right-side">
-	<div id="p2-color" ng-if="showPlayer2" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
-		<button id="ai-button" ng-click="toggleAI()" ng-class="{ activeAI: AI }">AI</button>
-		<h1 ng-if="!AI">Player two</h1>
-		<h1 ng-if="AI">Computer</h1>
-
-		<div id="p2-place" class="game-move" ng-class="{ active: move == 'p2-place' }">
-			<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-place' }"></i> Place</h2>
-		</div>
-		<div id="p2-twist" class="game-move" ng-class="{ active: move == 'p2-twist' }">
-			<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-twist' }"></i> Twist</h2>
 		</div>
 	</div>
 
-	<div id="moves-remaining" ng-if="showMovesRemaining" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
 
-		<h1>Moves Left</h1>
-		<h1>{{ availableMoves }}</h1>
+	<div id="right-side" ng-class="{ barelyVisible: (move == 'p1-place') || (move == 'p1-twist') }">
+		<div id="p2-color" ng-if="showPlayer2" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
+			<button id="ai-button" ng-click="toggleAI()" ng-class="{ activeAI: AI }">AI</button>
+			<h1 ng-if="!AI">Player two</h1>
+			<h1 ng-if="AI">Computer</h1>
+
+			<div id="p2-place" class="game-move" ng-class="{ active: move == 'p2-place' }">
+				<h2><i class="fa fa-th-large go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-place' }"></i> Place</h2>
+			</div>
+			<div id="p2-twist" class="game-move" ng-class="{ active: move == 'p2-twist' }">
+				<h2><i class="fa fa-repeat go-icon" aria-hidden="true" ng-class="{ active: move == 'p2-twist' }"></i> Twist</h2>
+			</div>
+		</div>
+
+		<div id="moves-remaining" ng-if="showMovesRemaining" ng-class="{ activetwo: (move == 'p2-place') || (move == 'p2-twist') }">
+
+			<h1>Moves Left</h1>
+			<h1>{{ availableMoves }}</h1>
+
+		</div>
 
 	</div>
-
-</div>
 
 </center>
 

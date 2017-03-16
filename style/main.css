@@ -544,7 +544,9 @@ a {
 
 
 
-
+.barelyVisible {
+    opacity: 0.2 !important;
+}
 
 /* KAPPISAN */
 
