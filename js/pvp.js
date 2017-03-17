@@ -1,4 +1,4 @@
-app.controller('pvpCtrl', ['$scope', function ($s) {
+app.controller('pvpCtrl', ['$rootScope', function ($s) {
 
     console.log("pvpCtrl");
 

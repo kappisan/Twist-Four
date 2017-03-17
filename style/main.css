@@ -103,18 +103,33 @@ a {
     font-size: 40px;
 }
 
-#ai-button {
+#ai-button,
+#human-button {
     background-color: #ccc;
     position: absolute;
-    width: 100px;
-    height: 20px;
+    width: 170px;
+    height: 40px;
     margin: auto;
-    left: 0;
-    right: 0;
-    top: 30px;
+    top: 152px;
+    font-size: 28px;
+    font-family: apache;
+    border: 4px;
+    border-style: solid;
+    border-color: #000;
+    border-radius: 4px;
 }
 
-#ai-button:hover {
+#ai-button {
+    right: 24px;
+
+}
+#human-button {
+    right: 210px;
+
+}
+
+#ai-button:hover,
+#human-button:hover {
     cursor: pointer;
 }
 
@@ -176,7 +191,7 @@ a {
     padding: 0;
     margin: 2px;
     font-size: 0;
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 .square {

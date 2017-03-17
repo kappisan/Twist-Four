@@ -14,7 +14,7 @@ var app = angular.module('app', ['ngRoute'])
 
 // CONTROLLERS
 
-app.controller('PageCtrl', ['$scope', '$rootScope', '$http', '$location', function($s, $r, $http, $location) {
+app.controller('PageCtrl', ['$rootScope', '$rootScope', '$http', '$location', function($s, $r, $http, $location) {
 
 
     console.log("location", $location.$$path);
