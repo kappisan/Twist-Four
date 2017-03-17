@@ -78,6 +78,9 @@ a {
     color: #fff;
 }
 
+.footerText {
+    margin: 4px;
+}
 
 #conainer {
     min-height: 600px;
@@ -92,7 +95,8 @@ a {
 #rules-section {
     background-color: #ed1c24;
     color: #fff;
-    padding: 30px 20px 50px 20px;
+    font-size: 22px;
+    padding: 30px 50px 50px 50px;
 }
 
 #rules-section h3 {
@@ -253,7 +257,7 @@ a {
 
 
 
-@media (max-width:1360px) { 
+@media (max-width:1440px) { 
 
     #left-side {
         position: relative;
@@ -275,12 +279,12 @@ a {
     }
 
     #p1-color h1, #p2-color h1, #moves-remaining h1 {
-        font-size: 20px;
+        font-size: 36px;
         margin: 10px 0 0 0;
     }
 
     #p1-color {
-        width: 206px;
+        width: 300px;
         color: #FFF;
         margin: 10px 0 0 0;
         border-radius: 5px;
@@ -289,10 +293,8 @@ a {
         background-color: #eee;
     }
 
-
-
     #p2-color {
-        width: 200px;
+        width: 300px;
         color: #FFF;
         margin: 10px 0 0 0;
         border-radius: 5px;
@@ -325,8 +327,7 @@ a {
 
 
 
-@media (min-width:1360px) { 
-
+@media (min-width:1440px) { 
 
     .game-move {
         margin: 10px;
@@ -367,11 +368,13 @@ a {
     #left-side {
         position: absolute;
         left: 20px;
+        top: 218px;
     }
 
     #right-side {
         position: absolute;
         right: 20px;
+        top: 218px;
     }
 
 }
