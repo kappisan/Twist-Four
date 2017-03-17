@@ -78,6 +78,10 @@ a {
     color: #fff;
 }
 
+#footer a:hover {
+    color: #ed1c24;
+}
+
 .footerText {
     margin: 4px;
 }
@@ -101,6 +105,26 @@ a {
 
 #rules-section h3 {
     font-size: 40px;
+}
+
+#new-game-button {
+    background-color: #ccc;
+    position: absolute;
+    width: 360px;
+    height: 40px;
+    margin: auto;
+    top: 152px;
+    font-size: 28px;
+    font-family: apache;
+    border: 4px;
+    border-style: solid;
+    border-color: #000;
+    border-radius: 4px;
+    left: 40px;
+}
+
+.disabledNG {
+    opacity: 0.2;
 }
 
 #ai-button,
@@ -129,7 +153,8 @@ a {
 }
 
 #ai-button:hover,
-#human-button:hover {
+#human-button:hover,
+#new-game-button:hover {
     cursor: pointer;
 }
 

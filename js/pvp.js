@@ -6,8 +6,11 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
     $s.move = "p1-place";
     $s.showPlayer2 = true;
     $s.showMovesRemaining = false;
+    $s.firstMove = true;
 
-    $s.playAgain = function playAgain() {
+
+    $s.playAgain = function() {
+        $s.firstMove = true;
         $("#game-score").css("display", "none");
         $(".square").removeClass("p1-square p2-square");
         $(".square div").removeClass("pulsating-square");
@@ -16,7 +19,8 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         $s.move = "p1-place";
     };
 
-    $s.selectSquare = function selectSquare(seg, sqr) {
+    $s.selectSquare = function(seg, sqr) {
+        $s.firstMove = false;
 
         if (($s.AI && $s.move) === "p2-place" || $s.gameOver) {
             return;
@@ -40,7 +44,8 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
     };
 
 
-    $s.rotateSeg = function rotateSeg(seg) {
+    $s.rotateSeg = function(seg) {
+        $s.firstMove = false;
         console.log("seg", seg);
         if ($s.gameOver === true) { return; }
 
@@ -65,7 +70,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         $s.checkWin();
     };
 
-    $s.moveAI = function moveAI() {
+    $s.moveAI = function() {
         if ($s.gameOver === true) {
             return;
         }
@@ -91,7 +96,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         }
     };
 
-    $s.toggleAI = function toggleAI() {
+    $s.toggleAI = function() {
         $s.AI = !$s.AI;
 
         if ($s.AI) { 

@@ -1,5 +1,7 @@
 <center style="background-color: #231f20;">
 
+	<button id="new-game-button" ng-click="playAgain()" ng-class="{ disabledNG: firstMove }">New Game</button>
+
 	<div id="left-side" ng-class="{ barelyVisible: (move == 'p2-place') || (move == 'p2-twist') }">
 		<div id="p1-color" ng-class="{ activeone: (move == 'p1-place') || (move == 'p1-twist') }">
 			<h1>Player one</h1>
