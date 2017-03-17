@@ -47,7 +47,11 @@ a {
 }
 
 .active {
-    background-color: #ff0000 !important;
+    background-color: #f00 !important;
+}
+
+.activeyellow {
+    background-color: #ee0 !important;
 }
 
 #about-page {
