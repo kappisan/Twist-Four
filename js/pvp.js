@@ -2,11 +2,12 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
 
     console.log("pvpCtrl");
 
-    $s.gameTitle = "Player vs Computer";
+    $s.gameTitle = "Player vs Computer1";
     $s.move = "p1-place";
     $s.showPlayer2 = true;
     $s.showMovesRemaining = false;
     $s.firstMove = true;
+    $s.difficulty = 1;
 
 
     $s.playAgain = function() {
@@ -18,6 +19,13 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
 
         $s.move = "p1-place";
     };
+
+    $s.toggleDifficulty = function(diff) {
+        console.log("difficulty toggled", diff);
+        $s.difficulty = diff;
+        $s.gameTitle = "Player vs Computer" + diff;
+        setTimeout(function() {$s.$apply();}, 100);
+    }
 
     $s.selectSquare = function(seg, sqr) {
         $s.firstMove = false;
@@ -100,7 +108,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         $s.AI = !$s.AI;
 
         if ($s.AI) { 
-            $s.gameTitle = "PLAYER VS COMPUTER";
+            $s.gameTitle = "PLAYER VS COMPUTER" + $s.difficulty;
             $s.moveAI(); 
         } else {
             $s.gameTitle = "PLAYER VS PLAYER";

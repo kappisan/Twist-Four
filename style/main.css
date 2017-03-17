@@ -17,6 +17,10 @@
     font-family: minecraft;
 }
 
+.apache {
+    font-family: apache;
+}
+
 h1, h2, h3 {
     font-family: apache;
 }
@@ -42,9 +46,15 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
-.apache {
-    font-family: apache;
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
+
 
 .active {
     background-color: #f00 !important;
@@ -164,13 +174,29 @@ a {
     border-color: #000;
 }
 
+.difficulty-container {
+    position: absolute;
+    right: 0;
+    top: 197px;
+    width: 420px;
+    font-size: 26px;
+    color: #fff;
+    font-family: apache;
+}
 
+.difficulty-container div {
+    margin: 0 36px;
+    display: inline-block;
+}
+.difficulty-container:hover,
+.difficulty-container input[type=radio]:hover {
+    cursor: pointer;
+}
 
-
-
-
-
-
+.difficulty-container input[type=radio] {
+    width: 18px;
+    height: 18px;
+}
 
 .fb-like-container {
     padding: 40px 20px;
