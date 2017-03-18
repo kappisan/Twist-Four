@@ -24,6 +24,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         console.log("difficulty toggled", diff);
         $s.difficulty = diff;
         $s.gameTitle = "Player vs Computer" + diff;
+        $("#difficulty"+diff).prop("checked", true);
         setTimeout(function() {$s.$apply();}, 100);
     }
 

@@ -198,6 +198,39 @@ a {
     height: 18px;
 }
 
+.difficulty-container input[type=radio]:checked {
+    background-color: #ed1c24;
+}
+
+.difficulty-container input[type='radio']:after {
+    width: 16px;
+    height: 16px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #d1d3d1;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+.difficulty-container input[type='radio']:checked:after {
+    width: 16px;
+    height: 16px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #ed1c24;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid white;
+}
+
+
 .fb-like-container {
     padding: 40px 20px;
 }

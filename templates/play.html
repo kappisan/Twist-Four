@@ -16,16 +16,16 @@
 		</div>
 	</div>
 
-
 	<button id="human-button" ng-click="toggleAI()" ng-class="{ activeAI: !AI }">Human</button>
 	<button id="ai-button" ng-click="toggleAI()" ng-class="{ activeAI: AI }">AI</button>
-	<div class="difficulty-container noSelect">
+
+	<div class="difficulty-container noSelect" ng-if="AI">
 		<div>
-			<input type="radio" name="ai" ng-model="difficulty" ng-value="1" ng-change="toggleDifficulty(1)">
+			<input id="difficulty1" type="radio" name="ai" ng-model="difficulty" ng-value="1" ng-change="toggleDifficulty(1)">
 			<span ng-click="toggleDifficulty(1)">level 1</span>
 		</div>
 		<div>
-			<input type="radio" name="ai" ng-model="difficulty" ng-value="2" ng-change="toggleDifficulty(2)">
+			<input id="difficulty2" type="radio" name="ai" ng-model="difficulty" ng-value="2" ng-change="toggleDifficulty(2)">
 			<span ng-click="toggleDifficulty(2)">level 2</span>
 		</div>
 	</div>
