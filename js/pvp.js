@@ -110,9 +110,16 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         return -1;
     }
 
-    $s.findWinningSeg = function() {
+    $s.getWinningSeg = function() {
 
-        console.log("$s.findWinningSeg");
+        console.log("$s.getWinningSeg");
+
+        return Math.floor(Math.random() * 4) + 1;
+    }
+
+    $s.findWinningSquare = function() {
+
+        console.log("$s.findWinningSquare");
 
         // first row
         var firstRow = ['#s11','#s12','#s21','#s22'];
@@ -235,7 +242,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         if ($s.move === "p2-place") {
             // find empty square
             if ($s.difficulty == "2") {
-                var winningSeg = $s.findWinningSeg();
+                var winningSeg = $s.findWinningSquare();
                 console.log("search for winning place move", winningSeg);
                 // var randSeg = winningSeg.seg;
                 // var randSqr = winningSeg.sqr;
@@ -281,9 +288,10 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
             if ($s.difficulty == "2") {
                 console.log("search for winning twist move");
                 // rotate random segment
-                var _randSeg = Math.floor(Math.random() * 4) + 1;
+                // var _randSeg = Math.floor(Math.random() * 4) + 1;
+                var winningSeg = $s.getWinningSeg();
 
-                $s.animateRotateSeg(_randSeg);
+                $s.animateRotateSeg(winningSeg);
             } else {
 
                 console.log("random twist move");
