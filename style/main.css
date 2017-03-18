@@ -347,7 +347,7 @@ a {
     #new-game-button,
     #ai-button,
     #human-button {
-        top: -70px;
+        top: -90px;
     }
 
     #ai-button {
@@ -374,13 +374,13 @@ a {
     }
 
     .difficulty-container {
-        top: -24px;
+        top: -44px;
         right: 40px;
     }
 
     #container {
         position: relative;
-        top: 110px;
+        top: 120px;
     }
 
     .game-title {
