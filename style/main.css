@@ -122,7 +122,6 @@ a {
 #new-game-button {
     background-color: #ccc;
     position: absolute;
-    width: 360px;
     height: 40px;
     margin: auto;
     font-size: 28px;
@@ -131,7 +130,6 @@ a {
     border-style: solid;
     border-color: #000;
     border-radius: 4px;
-    left: 40px;
 }
 
 .disabledNG {
@@ -142,7 +140,6 @@ a {
 #human-button {
     background-color: #ccc;
     position: absolute;
-    width: 170px;
     height: 40px;
     margin: auto;
     font-size: 28px;
@@ -153,20 +150,12 @@ a {
     border-radius: 4px;
 }
 
-#ai-button {
-    right: 24px;
-
-}
-#human-button {
-    right: 210px;
-
-}
-
 #ai-button:hover,
 #human-button:hover,
 #new-game-button:hover {
     cursor: pointer;
 }
+
 
 .activeAI {
     background-color: #056e05 !important;
@@ -176,17 +165,12 @@ a {
 
 .difficulty-container {
     position: absolute;
-    right: 0;
-    width: 420px;
+    width: 410px;
     font-size: 26px;
     color: #fff;
     font-family: apache;
 }
 
-.difficulty-container div {
-    margin: 0 36px;
-    display: inline-block;
-}
 .difficulty-container:hover,
 .difficulty-container input[type=radio]:hover {
     cursor: pointer;
@@ -363,16 +347,40 @@ a {
     #new-game-button,
     #ai-button,
     #human-button {
-        top: -50px;
+        top: -70px;
+    }
+
+    #ai-button {
+        right: 94px;
+
+    }
+    #human-button {
+        right: 250px;
+    }
+
+    #ai-button,
+    #human-button {
+        width: 146px;
+    }
+
+    .difficulty-container div {
+        margin: 0 24px;
+        display: inline-block;
+    }
+
+    #new-game-button {
+        width: 300px;
+        left: 90px;
     }
 
     .difficulty-container {
-        top: -4px;
+        top: -24px;
+        right: 40px;
     }
 
     #container {
         position: relative;
-        top: 80px;
+        top: 110px;
     }
 
     .game-title {
@@ -380,7 +388,7 @@ a {
         font-size: 50px;
         padding: 20px 0 0 0;
         position: relative;
-        bottom: 174px;
+        bottom: 190px;
     }
 
     #left-side {
@@ -459,8 +467,32 @@ a {
         top: 152px;
     }
 
+    #ai-button {
+        right: 24px;
+
+    }
+    #human-button {
+        right: 210px;
+    }
+
+    #ai-button,
+    #human-button {
+        width: 170px;
+    }
+
+    .difficulty-container div {
+        margin: 0 36px;
+        display: inline-block;
+    }
+
+    #new-game-button {
+        width: 360px;
+        left: 40px;
+    }
+
     .difficulty-container {
         top: 197px;
+        right: 20px;
     }
 
     .game-title {
