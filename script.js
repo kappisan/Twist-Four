@@ -105,7 +105,7 @@ app.controller('PageCtrl', ['$rootScope', '$rootScope', '$http', '$location', fu
         $("#game-score").css("display", "inherit");
     };
 
-    function addWinEffects(sq1,sq2,sq3,sq4) {
+    $s.addWinEffects = function addWinEffects(sq1,sq2,sq3,sq4) {
 
         console.log("add win effects", $('#s'+sq1));
 
@@ -122,61 +122,61 @@ app.controller('PageCtrl', ['$rootScope', '$rootScope', '$http', '$location', fu
         // first row
         if($('#s11').hasClass(player+"-square") && $('#s12').hasClass(player+"-square") && $('#s21').hasClass(player+"-square") && $('#s22').hasClass(player+"-square")) {
             playerWin = true; console.log("first row");
-            addWinEffects('11','12','21','22');
+            $s.addWinEffects('11','12','21','22');
         }
 
         // second row
         if($('#s14').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s23').hasClass(player+"-square")) {
             playerWin = true; console.log("second row");
-            addWinEffects('14','13','24','23');
+            $s.addWinEffects('14','13','24','23');
         }
 
         // third row
         if($('#s31').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s42').hasClass(player+"-square")) {
             playerWin = true; console.log("third row");
-            addWinEffects('31','32','41','42');
+            $s.addWinEffects('31','32','41','42');
         }
 
         // fourth row
         if($('#s34').hasClass(player+"-square") && $('#s33').hasClass(player+"-square") && $('#s44').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
             playerWin = true; console.log("fourth row");
-            addWinEffects('34','33','44','43');
+            $s.addWinEffects('34','33','44','43');
         }
 
         // first column
         if($('#s11').hasClass(player+"-square") && $('#s14').hasClass(player+"-square") && $('#s31').hasClass(player+"-square") && $('#s34').hasClass(player+"-square")) {
             playerWin = true; console.log("first column");
-            addWinEffects('11','14','31','34');
+            $s.addWinEffects('11','14','31','34');
         }
 
         // second column
         if($('#s12').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s33').hasClass(player+"-square")) {
             playerWin = true; console.log("second column");
-            addWinEffects('12','13','32','33');
+            $s.addWinEffects('12','13','32','33');
         }
 
         // third column
         if($('#s21').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s44').hasClass(player+"-square")) {
             playerWin = true; console.log("third column");
-            addWinEffects('21','24','41','44');
+            $s.addWinEffects('21','24','41','44');
         }
 
         // fourth column
         if($('#s22').hasClass(player+"-square") && $('#s23').hasClass(player+"-square") && $('#s42').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
             playerWin = true; console.log("fourth column");
-            addWinEffects('22','23','42','43');
+            $s.addWinEffects('22','23','42','43');
         }
 
         // top left diagonal
         if($('#s11').hasClass(player+"-square") && $('#s13').hasClass(player+"-square") && $('#s41').hasClass(player+"-square") && $('#s43').hasClass(player+"-square")) {
             playerWin = true; console.log("left diagonal");
-            addWinEffects('11','13','41','43');
+            $s.addWinEffects('11','13','41','43');
         }
 
         // top right diagonal
         if($('#s22').hasClass(player+"-square") && $('#s24').hasClass(player+"-square") && $('#s32').hasClass(player+"-square") && $('#s34').hasClass(player+"-square")) {
             playerWin = true; console.log("right diagonal");
-            addWinEffects('22','24','32','34');
+            $s.addWinEffects('22','24','32','34');
         }
 
         return playerWin;

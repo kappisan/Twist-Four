@@ -77,6 +77,156 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         $s.checkWin();
     };
 
+    function findWinningLine(elements) {
+        //console.log("find winning line", elements);
+        if($(elements[0]).hasClass("p2-square") 
+            && $(elements[1]).hasClass("p2-square") 
+            && $(elements[2]).hasClass("p2-square") 
+            && !$(elements[3]).hasClass("p2-square")
+            && !$(elements[3]).hasClass("p1-square")) {
+                return 3;
+        }
+        if($(elements[0]).hasClass("p2-square") 
+            && $(elements[1]).hasClass("p2-square") 
+            && !$(elements[2]).hasClass("p2-square") 
+            && $(elements[3]).hasClass("p2-square")
+            && !$(elements[2]).hasClass("p1-square")) {
+                return 2;
+        }
+        if($(elements[0]).hasClass("p2-square") 
+            && !$(elements[1]).hasClass("p2-square") 
+            && $(elements[2]).hasClass("p2-square") 
+            && $(elements[3]).hasClass("p2-square")
+            && !$(elements[1]).hasClass("p1-square")) {
+                return 1;
+        }
+        if(!$(elements[0]).hasClass("p2-square") 
+            && $(elements[1]).hasClass("p2-square") 
+            && $(elements[2]).hasClass("p2-square") 
+            && $(elements[3]).hasClass("p2-square")
+            && !$(elements[0]).hasClass("p1-square")) {
+                return 0;
+        }
+        return -1;
+    }
+
+    $s.findWinningSeg = function() {
+
+        console.log("$s.findWinningSeg");
+
+        // first row
+        var firstRow = ['#s11','#s12','#s21','#s22'];
+        if(findWinningLine(firstRow) !== -1) {
+            console.log("firstRow", firstRow, findWinningLine(firstRow));
+            var winningIndex = findWinningLine(firstRow);
+
+            $s.gameOver = true;
+            return firstRow[winningIndex];
+        }
+
+        // second row
+        var secondRow = ['#s14','#s13','#s24','#s23'];
+        if(findWinningLine(secondRow) !== -1) {
+            console.log("secondRow", secondRow, findWinningLine(secondRow));
+            var winningIndex = findWinningLine(secondRow);
+
+            $s.gameOver = true;
+            return secondRow[winningIndex];
+        }
+
+        // third row
+        var thirdRow = ['#s31','#s32','#s41','#s42'];
+        if(findWinningLine(thirdRow) !== -1) {
+            console.log("thirdRow", thirdRow, findWinningLine(thirdRow));
+            var winningIndex = findWinningLine(thirdRow);
+
+            $s.gameOver = true;
+            return thirdRow[winningIndex];
+        }
+
+        // fourth row
+        var fourthRow = ['#s34','#s33','#s44','#s43'];
+        if(findWinningLine(fourthRow) !== -1) {
+            console.log("fourthRow", fourthRow, findWinningLine(fourthRow));
+            var winningIndex = findWinningLine(fourthRow);
+
+            $s.gameOver = true;
+            return fourthRow[winningIndex];
+        }
+
+        // first column
+        var firstColumn = ['#s11','#s14','#s31','#s34'];
+        if(findWinningLine(firstColumn) !== -1) {
+            console.log("firstColumn", firstColumn, findWinningLine(firstColumn));
+            var winningIndex = findWinningLine(firstColumn);
+
+            $s.gameOver = true;
+            return firstColumn[winningIndex];
+        }
+
+        // second column
+        var secondColumn = ['#s12','#s13','#s32','#s33'];
+        if(findWinningLine(secondColumn) !== -1) {
+            console.log("secondColumn", secondColumn, findWinningLine(secondColumn));
+            var winningIndex = findWinningLine(secondColumn);
+
+            $s.gameOver = true;
+            return secondColumn[winningIndex];
+        }
+
+        // third column
+        var thirdColumn = ['#s21','#s24','#s41','#s44'];
+        if(findWinningLine(thirdColumn) !== -1) {
+            console.log("thirdColumn", thirdColumn, findWinningLine(thirdColumn));
+            var winningIndex = findWinningLine(thirdColumn);
+
+            $s.gameOver = true;
+            return thirdColumn[winningIndex];
+        }
+
+        // fourth column
+        var fourthColumn = ['#s22','#s23','#s42','#s43'];
+        if(findWinningLine(fourthColumn) !== -1) {
+            console.log("fourthColumn", fourthColumn, findWinningLine(fourthColumn));
+            var winningIndex = findWinningLine(fourthColumn);
+
+            $s.gameOver = true;
+            return fourthColumn[winningIndex];
+        }
+
+        // top left diagonal
+        var tlDiagonal = ['#s11','#s13','#s41','#s43'];
+        if(findWinningLine(tlDiagonal) !== -1) {
+            console.log("tlDiagonal", tlDiagonal, findWinningLine(tlDiagonal));
+            var winningIndex = findWinningLine(tlDiagonal);
+
+            $s.gameOver = true;
+            return tlDiagonal[winningIndex];
+        }
+
+        // top right diagonal
+        var trDiagonal = ['#s22','#s24','#s32','#s34'];
+        if(findWinningLine(trDiagonal) !== -1) {
+            console.log("trDiagonal", trDiagonal, findWinningLine(trDiagonal));
+            var winningIndex = findWinningLine(trDiagonal);
+
+            $s.gameOver = true;
+            return trDiagonal[winningIndex];
+        }
+
+        var move = {
+            seg: Math.floor(Math.random() * 4) + 1,
+            sqr: Math.floor(Math.random() * 4) + 1
+        };
+
+        while ($("#s" + move.seg + move.sqr).hasClass("p1-square") || $("#s" + move.seg + move.sqr).hasClass("p2-square")) {
+            move.seg = Math.floor(Math.random() * 4) + 1;
+            move.sqr = Math.floor(Math.random() * 4) + 1;
+        }
+
+        return "#s" + move.seg + "" + move.sqr;
+    }
+
     $s.moveAI = function() {
         if ($s.gameOver === true) {
             return;
@@ -85,9 +235,26 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         if ($s.move === "p2-place") {
             // find empty square
             if ($s.difficulty == "2") {
-                console.log("search for winning place move");
-                var randSeg = Math.floor(Math.random() * 4) + 1;
-                var randSqr = Math.floor(Math.random() * 4) + 1;
+                var winningSeg = $s.findWinningSeg();
+                console.log("search for winning place move", winningSeg);
+                // var randSeg = winningSeg.seg;
+                // var randSqr = winningSeg.sqr;
+
+                setTimeout( function() {
+                    $(winningSeg).addClass("p2-square");
+                    $s.winText = "Computer Lv2 Wins";
+                    $s.checkPlayerWin("p2");
+                    $s.checkWin();
+                }, 500);
+
+
+                setTimeout( function() {
+                    if (!$s.gameOver) {
+                        $s.move = "p2-twist"; $s.$apply(); $s.moveAI();
+                    }
+                }, 700);
+
+                return;
             } else {
                 console.log("random place move");
                 var randSeg = Math.floor(Math.random() * 4) + 1;
@@ -101,7 +268,13 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
             }
 
             setTimeout( function() {$("#s" + randSeg + randSqr).addClass("p2-square");}, 500);
-            setTimeout( function() {$s.move = "p2-twist"; $s.$apply(); $s.moveAI();}, 600);
+            setTimeout( function() {
+                if (!$s.gameOver) {
+                    $s.move = "p2-twist"; 
+                    $s.$apply(); 
+                    $s.moveAI();
+                }
+            }, 600);
 
         } else if ($s.move == "p2-twist") {
 
