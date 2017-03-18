@@ -16,7 +16,6 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         $(".square").removeClass("p1-square p2-square");
         $(".square div").removeClass("pulsating-square");
         $s.gameOver = false;
-
         $s.move = "p1-place";
     };
 
@@ -25,7 +24,6 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         $s.difficulty = diff;
         $s.gameTitle = "Player vs Computer" + diff;
         $("#difficulty"+diff).prop("checked", true);
-        setTimeout(function() {$s.$apply();}, 100);
     }
 
     $s.selectSquare = function(seg, sqr) {
@@ -86,8 +84,16 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
 
         if ($s.move === "p2-place") {
             // find empty square
-            var randSeg = Math.floor(Math.random() * 4) + 1;
-            var randSqr = Math.floor(Math.random() * 4) + 1;
+            if ($s.difficulty == "2") {
+                console.log("search for winning place move");
+                var randSeg = Math.floor(Math.random() * 4) + 1;
+                var randSqr = Math.floor(Math.random() * 4) + 1;
+            } else {
+                console.log("random place move");
+                var randSeg = Math.floor(Math.random() * 4) + 1;
+                var randSqr = Math.floor(Math.random() * 4) + 1;
+            }
+
 
             while ($("#s" + randSeg + randSqr).hasClass("p1-square") || $("#s" + randSeg + randSqr).hasClass("p2-square")) {
                 randSeg = Math.floor(Math.random() * 4) + 1;
@@ -98,10 +104,22 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
             setTimeout( function() {$s.move = "p2-twist"; $s.$apply(); $s.moveAI();}, 600);
 
         } else if ($s.move == "p2-twist") {
-            // rotate random segment
-            var _randSeg = Math.floor(Math.random() * 4) + 1;
 
-            $s.animateRotateSeg(_randSeg);
+            if ($s.difficulty == "2") {
+                console.log("search for winning twist move");
+                // rotate random segment
+                var _randSeg = Math.floor(Math.random() * 4) + 1;
+
+                $s.animateRotateSeg(_randSeg);
+            } else {
+
+                console.log("random twist move");
+                // rotate random segment
+                var _randSeg = Math.floor(Math.random() * 4) + 1;
+
+                $s.animateRotateSeg(_randSeg);
+            }
+
         }
     };
 

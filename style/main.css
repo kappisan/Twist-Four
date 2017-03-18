@@ -34,7 +34,9 @@ html {
 }
 
 body {
-	font-family: montserrat, arial, verdana;
+    font-family: montserrat, arial, verdana;
+    background-color: #231f20;
+    min-width: 800px;
 }
 
 h2 {
@@ -123,7 +125,6 @@ a {
     width: 360px;
     height: 40px;
     margin: auto;
-    top: 152px;
     font-size: 28px;
     font-family: apache;
     border: 4px;
@@ -144,7 +145,6 @@ a {
     width: 170px;
     height: 40px;
     margin: auto;
-    top: 152px;
     font-size: 28px;
     font-family: apache;
     border: 4px;
@@ -177,7 +177,6 @@ a {
 .difficulty-container {
     position: absolute;
     right: 0;
-    top: 197px;
     width: 420px;
     font-size: 26px;
     color: #fff;
@@ -233,6 +232,8 @@ a {
 
 .fb-like-container {
     padding: 40px 20px;
+    height: 140px;
+    background-color: #fff;
 }
 
 
@@ -358,6 +359,30 @@ a {
 
 @media (max-width:1440px) { 
 
+
+    #new-game-button,
+    #ai-button,
+    #human-button {
+        top: -50px;
+    }
+
+    .difficulty-container {
+        top: -4px;
+    }
+
+    #container {
+        position: relative;
+        top: 80px;
+    }
+
+    .game-title {
+        color: #fff;
+        font-size: 50px;
+        padding: 20px 0 0 0;
+        position: relative;
+        bottom: 174px;
+    }
+
     #left-side {
         position: relative;
         left: 0;
@@ -405,14 +430,14 @@ a {
     #left-side {
         position: relative;
         left: 0;
-        top: 0;
+        top: 100px;
         display: inline-block;
     }
 
     #right-side {
         position: relative;
         right: 0;
-        top: 0;
+        top: 100px;
         display: inline-block;
     }
 
@@ -427,6 +452,22 @@ a {
 
 
 @media (min-width:1440px) { 
+
+    #new-game-button,
+    #ai-button,
+    #human-button {
+        top: 152px;
+    }
+
+    .difficulty-container {
+        top: 197px;
+    }
+
+    .game-title {
+        color: #fff;
+        font-size: 50px;
+        padding: 20px 0 0 0;
+    }
 
     .game-move {
         margin: 10px;
@@ -715,10 +756,4 @@ a {
   width: 80px;
   float: right;
   margin: 10px 50px 0 0;
-}
-
-.game-title {
-    color: #fff;
-    font-size: 50px;
-    padding: 20px 0 0 0;
 }
