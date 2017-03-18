@@ -77,34 +77,34 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         $s.checkWin();
     };
 
-    function findWinningLine(elements) {
+    function findWinningLine(elements, player, opponent) {
         //console.log("find winning line", elements);
-        if($(elements[0]).hasClass("p2-square") 
-            && $(elements[1]).hasClass("p2-square") 
-            && $(elements[2]).hasClass("p2-square") 
-            && !$(elements[3]).hasClass("p2-square")
-            && !$(elements[3]).hasClass("p1-square")) {
+        if($(elements[0]).hasClass(player + "-square") 
+            && $(elements[1]).hasClass(player + "-square") 
+            && $(elements[2]).hasClass(player + "-square") 
+            && !$(elements[3]).hasClass(player + "-square")
+            && !$(elements[3]).hasClass(opponent + "-square")) {
                 return 3;
         }
-        if($(elements[0]).hasClass("p2-square") 
-            && $(elements[1]).hasClass("p2-square") 
-            && !$(elements[2]).hasClass("p2-square") 
-            && $(elements[3]).hasClass("p2-square")
-            && !$(elements[2]).hasClass("p1-square")) {
+        if($(elements[0]).hasClass(player + "-square") 
+            && $(elements[1]).hasClass(player + "-square") 
+            && !$(elements[2]).hasClass(player + "-square") 
+            && $(elements[3]).hasClass(player + "-square")
+            && !$(elements[2]).hasClass(opponent + "-square")) {
                 return 2;
         }
-        if($(elements[0]).hasClass("p2-square") 
-            && !$(elements[1]).hasClass("p2-square") 
-            && $(elements[2]).hasClass("p2-square") 
-            && $(elements[3]).hasClass("p2-square")
-            && !$(elements[1]).hasClass("p1-square")) {
+        if($(elements[0]).hasClass(player + "-square") 
+            && !$(elements[1]).hasClass(player + "-square") 
+            && $(elements[2]).hasClass(player + "-square") 
+            && $(elements[3]).hasClass(player + "-square")
+            && !$(elements[1]).hasClass(opponent + "-square")) {
                 return 1;
         }
-        if(!$(elements[0]).hasClass("p2-square") 
-            && $(elements[1]).hasClass("p2-square") 
-            && $(elements[2]).hasClass("p2-square") 
-            && $(elements[3]).hasClass("p2-square")
-            && !$(elements[0]).hasClass("p1-square")) {
+        if(!$(elements[0]).hasClass(player + "-square") 
+            && $(elements[1]).hasClass(player + "-square") 
+            && $(elements[2]).hasClass(player + "-square") 
+            && $(elements[3]).hasClass(player + "-square")
+            && !$(elements[0]).hasClass(opponent + "-square")) {
                 return 0;
         }
         return -1;
@@ -121,105 +121,8 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
 
         console.log("$s.findWinningSquare");
 
-        // first row
-        var firstRow = ['#s11','#s12','#s21','#s22'];
-        if(findWinningLine(firstRow) !== -1) {
-            console.log("firstRow", firstRow, findWinningLine(firstRow));
-            var winningIndex = findWinningLine(firstRow);
-
-            $s.gameOver = true;
-            return firstRow[winningIndex];
-        }
-
-        // second row
-        var secondRow = ['#s14','#s13','#s24','#s23'];
-        if(findWinningLine(secondRow) !== -1) {
-            console.log("secondRow", secondRow, findWinningLine(secondRow));
-            var winningIndex = findWinningLine(secondRow);
-
-            $s.gameOver = true;
-            return secondRow[winningIndex];
-        }
-
-        // third row
-        var thirdRow = ['#s31','#s32','#s41','#s42'];
-        if(findWinningLine(thirdRow) !== -1) {
-            console.log("thirdRow", thirdRow, findWinningLine(thirdRow));
-            var winningIndex = findWinningLine(thirdRow);
-
-            $s.gameOver = true;
-            return thirdRow[winningIndex];
-        }
-
-        // fourth row
-        var fourthRow = ['#s34','#s33','#s44','#s43'];
-        if(findWinningLine(fourthRow) !== -1) {
-            console.log("fourthRow", fourthRow, findWinningLine(fourthRow));
-            var winningIndex = findWinningLine(fourthRow);
-
-            $s.gameOver = true;
-            return fourthRow[winningIndex];
-        }
-
-        // first column
-        var firstColumn = ['#s11','#s14','#s31','#s34'];
-        if(findWinningLine(firstColumn) !== -1) {
-            console.log("firstColumn", firstColumn, findWinningLine(firstColumn));
-            var winningIndex = findWinningLine(firstColumn);
-
-            $s.gameOver = true;
-            return firstColumn[winningIndex];
-        }
-
-        // second column
-        var secondColumn = ['#s12','#s13','#s32','#s33'];
-        if(findWinningLine(secondColumn) !== -1) {
-            console.log("secondColumn", secondColumn, findWinningLine(secondColumn));
-            var winningIndex = findWinningLine(secondColumn);
-
-            $s.gameOver = true;
-            return secondColumn[winningIndex];
-        }
-
-        // third column
-        var thirdColumn = ['#s21','#s24','#s41','#s44'];
-        if(findWinningLine(thirdColumn) !== -1) {
-            console.log("thirdColumn", thirdColumn, findWinningLine(thirdColumn));
-            var winningIndex = findWinningLine(thirdColumn);
-
-            $s.gameOver = true;
-            return thirdColumn[winningIndex];
-        }
-
-        // fourth column
-        var fourthColumn = ['#s22','#s23','#s42','#s43'];
-        if(findWinningLine(fourthColumn) !== -1) {
-            console.log("fourthColumn", fourthColumn, findWinningLine(fourthColumn));
-            var winningIndex = findWinningLine(fourthColumn);
-
-            $s.gameOver = true;
-            return fourthColumn[winningIndex];
-        }
-
-        // top left diagonal
-        var tlDiagonal = ['#s11','#s13','#s41','#s43'];
-        if(findWinningLine(tlDiagonal) !== -1) {
-            console.log("tlDiagonal", tlDiagonal, findWinningLine(tlDiagonal));
-            var winningIndex = findWinningLine(tlDiagonal);
-
-            $s.gameOver = true;
-            return tlDiagonal[winningIndex];
-        }
-
-        // top right diagonal
-        var trDiagonal = ['#s22','#s24','#s32','#s34'];
-        if(findWinningLine(trDiagonal) !== -1) {
-            console.log("trDiagonal", trDiagonal, findWinningLine(trDiagonal));
-            var winningIndex = findWinningLine(trDiagonal);
-
-            $s.gameOver = true;
-            return trDiagonal[winningIndex];
-        }
+        var compMove = findWinner('p2', true);
+        if (!compMove) { compMove = findWinner('p1', false); }
 
         var move = {
             seg: Math.floor(Math.random() * 4) + 1,
@@ -231,7 +134,117 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
             move.sqr = Math.floor(Math.random() * 4) + 1;
         }
 
-        return "#s" + move.seg + "" + move.sqr;
+        return compMove ? compMove : "#s" + move.seg + "" + move.sqr;
+    }
+
+    function findWinner(player, isSelf) {
+
+        var opponent = 'p1';
+        if (player == 'p1') {
+            opponent = 'p2';
+        }
+
+        // first row
+        var firstRow = ['#s11','#s12','#s21','#s22'];
+        if(findWinningLine(firstRow, player, opponent) !== -1) {
+            console.log("firstRow", firstRow, findWinningLine(firstRow, player, opponent));
+            var winningIndex = findWinningLine(firstRow, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return firstRow[winningIndex];
+        }
+
+        // second row
+        var secondRow = ['#s14','#s13','#s24','#s23'];
+        if(findWinningLine(secondRow, player, opponent) !== -1) {
+            console.log("secondRow", secondRow, findWinningLine(secondRow, player, opponent));
+            var winningIndex = findWinningLine(secondRow, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return secondRow[winningIndex];
+        }
+
+        // third row
+        var thirdRow = ['#s31','#s32','#s41','#s42'];
+        if(findWinningLine(thirdRow, player, opponent) !== -1) {
+            console.log("thirdRow", thirdRow, findWinningLine(thirdRow, player, opponent));
+            var winningIndex = findWinningLine(thirdRow, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return thirdRow[winningIndex];
+        }
+
+        // fourth row
+        var fourthRow = ['#s34','#s33','#s44','#s43'];
+        if(findWinningLine(fourthRow, player, opponent) !== -1) {
+            console.log("fourthRow", fourthRow, findWinningLine(fourthRow, player, opponent));
+            var winningIndex = findWinningLine(fourthRow, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return fourthRow[winningIndex];
+        }
+
+        // first column
+        var firstColumn = ['#s11','#s14','#s31','#s34'];
+        if(findWinningLine(firstColumn, player, opponent) !== -1) {
+            console.log("firstColumn", firstColumn, findWinningLine(firstColumn, player, opponent));
+            var winningIndex = findWinningLine(firstColumn, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return firstColumn[winningIndex];
+        }
+
+        // second column
+        var secondColumn = ['#s12','#s13','#s32','#s33'];
+        if(findWinningLine(secondColumn, player, opponent) !== -1) {
+            console.log("secondColumn", secondColumn, findWinningLine(secondColumn, player, opponent));
+            var winningIndex = findWinningLine(secondColumn, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return secondColumn[winningIndex];
+        }
+
+        // third column
+        var thirdColumn = ['#s21','#s24','#s41','#s44'];
+        if(findWinningLine(thirdColumn, player, opponent) !== -1) {
+            console.log("thirdColumn", thirdColumn, findWinningLine(thirdColumn, player, opponent));
+            var winningIndex = findWinningLine(thirdColumn, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return thirdColumn[winningIndex];
+        }
+
+        // fourth column
+        var fourthColumn = ['#s22','#s23','#s42','#s43'];
+        if(findWinningLine(fourthColumn, player, opponent) !== -1) {
+            console.log("fourthColumn", fourthColumn, findWinningLine(fourthColumn, player, opponent));
+            var winningIndex = findWinningLine(fourthColumn, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return fourthColumn[winningIndex];
+        }
+
+        // top left diagonal
+        var tlDiagonal = ['#s11','#s13','#s41','#s43'];
+        if(findWinningLine(tlDiagonal, player, opponent) !== -1) {
+            console.log("tlDiagonal", tlDiagonal, findWinningLine(tlDiagonal, player, opponent));
+            var winningIndex = findWinningLine(tlDiagonal, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return tlDiagonal[winningIndex];
+        }
+
+        // top right diagonal
+        var trDiagonal = ['#s22','#s24','#s32','#s34'];
+        if(findWinningLine(trDiagonal, player, opponent) !== -1) {
+            console.log("trDiagonal", trDiagonal, findWinningLine(trDiagonal, player, opponent));
+            var winningIndex = findWinningLine(trDiagonal, player, opponent);
+
+            if (isSelf) { $s.gameOver = true; }
+            return trDiagonal[winningIndex];
+        }
+
+        return false;
     }
 
     $s.moveAI = function() {
