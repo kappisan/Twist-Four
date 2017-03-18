@@ -487,7 +487,7 @@ a {
 
     #new-game-button {
         width: 360px;
-        left: 40px;
+        left: 20px;
     }
 
     .difficulty-container {
@@ -518,7 +518,7 @@ a {
     #p1-color {
         width: 356px;
         color: #FFF;
-        margin: 20px 0 0 20px;
+        margin: 20px 0 0 0;
         border-radius: 5px;
         border-style: solid;
         border-color: #000;
@@ -727,9 +727,9 @@ a {
     opacity: 1.0
 }
 @-webkit-keyframes pulsate {
-    0% {-webkit-transform: scale(0.95, 0.95); opacity: 1.05;}
-    50% {-webkit-transform: scale(1.05, 1.05); opacity: 0.95;}
-    100% {-webkit-transform: scale(0.95, 0.95); opacity: 1.05;}
+    0% {-webkit-transform: scale(0.95, 0.95);}
+    50% {-webkit-transform: scale(1.05, 1.05);}
+    100% {-webkit-transform: scale(0.95, 0.95);}
 }
 
 @-webkit-keyframes twist {
