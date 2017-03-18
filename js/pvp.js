@@ -242,7 +242,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
 
                 setTimeout( function() {
                     $(winningSeg).addClass("p2-square");
-                    $s.winText = "Computer Lv2 Wins";
+                    $s.winText = "Computer Wins";
                     $s.checkPlayerWin("p2");
                     $s.checkWin();
                 }, 500);
