@@ -360,6 +360,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         }
 
         if ($s.move === "p2-place") {
+
             // find empty square
             if ($s.difficulty == "2") {
                 var winningSeg = $s.findWinningSquare();
@@ -417,6 +418,21 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
                 var _randSeg = Math.floor(Math.random() * 4) + 1;
 
                 $s.animateRotateSeg(_randSeg);
+            }
+
+            // if all squares taken
+            var allSquares = true;
+            for(var i = 1; i <= 4; i++) {
+                for(var j = 1; j <= 4; j++) {
+                    if(!$('#s'+i+''+j).hasClass("p1-square") && !$('#s'+i+''+j).hasClass("p2-square")) allSquares = false;
+                }
+            }
+            if (allSquares) {
+                console.log("all squares taken, draw");
+                $s.winText = "Draw";
+                $s.playerDraw(); 
+                $s.gameOver = true;
+                return;
             }
         }
     };

@@ -20,7 +20,7 @@ app.controller('PageCtrl', ['$rootScope', '$rootScope', '$http', '$location', fu
     console.log("location", $location.$$path);
     $s.currentPage = $location.$$path;
 
-    $s.winText = "No Win";
+    $s.winText = "Draw";
     $s.AI = true;
     $s.gameOver = false;
     $s.showLoadingSpinner = true;

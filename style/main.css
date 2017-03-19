@@ -186,13 +186,13 @@ a {
 }
 
 .difficulty-container input[type='radio']:after {
-    width: 16px;
-    height: 16px;
-    border-radius: 15px;
-    top: -2px;
-    left: -1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 14px;
+    top: 2px;
+    left: 2px;
     position: relative;
-    background-color: #d1d3d1;
+    background-color: #fff;
     content: '';
     display: inline-block;
     visibility: visible;
@@ -200,11 +200,11 @@ a {
 }
 
 .difficulty-container input[type='radio']:checked:after {
-    width: 16px;
-    height: 16px;
-    border-radius: 15px;
-    top: -2px;
-    left: -1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 14px;
+    top: 2px;
+    left: 2px;
     position: relative;
     background-color: #ed1c24;
     content: '';
