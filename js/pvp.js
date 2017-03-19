@@ -2,12 +2,12 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
 
     console.log("pvpCtrl");
 
-    $s.gameTitle = "Player vs Computer1";
+    $s.gameTitle = "Player vs Computer2";
     $s.move = "p1-place";
     $s.showPlayer2 = true;
     $s.showMovesRemaining = false;
     $s.firstMove = true;
-    $s.difficulty = 1;
+    $s.difficulty = 2;
 
 
     $s.playAgain = function() {
