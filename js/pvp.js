@@ -135,8 +135,8 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
 
         console.log("$s.findWinningSquare");
 
-        var compMove = findWinner('p2', true); // winning move
-        if (!compMove) { compMove = findWinner('p1', false); } // block opponent win
+        var compMove = findWinner('p2'); // winning move
+        if (!compMove) { compMove = findWinner('p1'); } // block opponent win
 
         var move = {
             seg: Math.floor(Math.random() * 4) + 1,
@@ -163,7 +163,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
     }
 
     // find a winning move on the current board
-    function findWinner(player, isSelf) {
+    function findWinner(player) {
 
         // assign opponent
         var opponent = 'p1';
