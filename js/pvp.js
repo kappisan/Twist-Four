@@ -8,7 +8,7 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
     $s.showMovesRemaining = false;
     $s.firstMove = true;
     $s.difficulty = 2;
-
+    $s.moves = [];
 
     $s.playAgain = function() {
         $s.firstMove = true;
@@ -42,9 +42,12 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         if ($s.move === "p1-place") {
             $('#s' + seg + sqr).addClass("p1-square");
             setTimeout(function() { $s.move = "p1-twist"; $s.$apply();}, 20);
+            $s.moves.push('p1 places #s' + seg + sqr);
         } else if ($s.move === "p2-place") {
+            // this should only gets entered if human vs human
             $('#s' + seg + sqr).addClass("p2-square");
             setTimeout(function() { $s.move = "p2-twist"; $s.$apply();}, 20);
+            $s.moves.push('p2 places #s' + seg + sqr);
         }
 
         $s.checkWin();
@@ -69,9 +72,11 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
         if ($s.move === "p1-twist") {
             $s.move = "p2-place";
             if ($s.AI) { setTimeout(function() { $s.moveAI(); }, 800); }
+            $s.moves.push('p1 twists segment ' + seg);
 
         } else if ($s.move == "p2-twist") {
             $s.move = "p1-place";
+            $s.moves.push('p2 twists segment ' + seg);
         }
 
         $s.checkWin();
@@ -372,6 +377,9 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
                     $s.winText = "Computer Wins";
                     $s.checkPlayerWin("p2");
                     $s.checkWin();
+
+                    $s.moves.push('p2 places ' + winningSeg);
+
                 }, 500);
 
 
@@ -395,6 +403,10 @@ app.controller('pvpCtrl', ['$rootScope', function ($s) {
             }
 
             setTimeout( function() {$("#s" + randSeg + randSqr).addClass("p2-square");}, 500);
+
+            $s.moves.push('p2 places random #s' + randSeg + randSqr);
+
+
             setTimeout( function() {
                 if (!$s.gameOver) {
                     $s.move = "p2-twist"; 

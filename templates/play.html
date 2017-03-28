@@ -16,6 +16,15 @@
 		</div>
 	</div>
 
+	<div id="moves-container">
+
+		<h1>Moves</h1>
+		<div>
+			<p ng-repeat="move in moves track by $index">{{ $index + 1 }} - {{ move }}</p>
+		</div>
+	</div>
+
+
 	<button id="human-button" ng-click="toggleAI()" ng-class="{ activeAI: !AI }">Human</button>
 	<button id="ai-button" ng-click="toggleAI()" ng-class="{ activeAI: AI }">AI</button>
 
